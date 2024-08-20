@@ -1,0 +1,148 @@
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Monstserrat";
+
+}
+
+.jumbotron {
+    background: none;
+}
+
+.bg-blur {
+    background-color: rgba(0, 0, 0, 0.7); /* Black w/opacity/see-through */
+}
+
+body {
+    background-image: url("/images/tank.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+.container, .container-fluid {
+    padding-top: 90px;
+}
+
+.bg-text {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
+
+td, th {
+    padding: 3px 8px;
+}
+
+form.main-form {
+    padding: 10px 30px;
+    border-radius: 20px;
+}
+
+.logged-user {
+    color: white;
+}
+
+.custom-login-div {
+    max-width: 40%;
+    margin: 0 auto;
+    min-width: 300px;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.d-flex {
+    margin: 0 auto;
+}
+
+.custom-register-div {
+    margin: 0 auto;
+}
+
+#h1home {
+
+    background-color: black;
+    color: white;
+    opacity: 0.9;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto 10px;
+}
+
+.customSpan {
+
+    text-align: center;
+    margin: 0 auto;
+}
+
+.customH3 {
+    text-align: center;
+}
+
+a {
+    color: white;
+}
+
+
+nav.navbar {
+    background-color: black;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+h1 {
+    font-family: "Montserrat-Black", serif;
+    font-size: 3rem;
+    line-height: 1.5;
+}
+
+#welcome-text {
+    padding-left: 225px;
+}
+
+#searchForm {
+    margin-left: 80px;
+    margin-bottom: 200px;
+}
+
+#searchH2 {
+    margin-bottom: 100px;
+}
+
+#languageNav {
+    margin-left: 9px;
+    margin-top: 7px;
+}
+
+#searchIcon {
+    width: 20px;
+}
+
+
+
+
+
+
+
+
+
+

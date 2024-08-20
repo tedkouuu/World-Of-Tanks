@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>World_Of_Tanks Application</title>
+    <th:block th:replace="~{fragments/head}"></th:block>
+</head>
+<body class="body-main">
+<header th:include="~{fragments/navigation}"></header>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container text-light" style="display: none;">
+            <h1 class="display-3">
+                <strong class="pl-3 font-weight-bold">Login</strong></h1>
+        </div>
+
+        <div class="custom-login-div">
+            <form th:action="@{/users/login}"
+                  th:method="post">
+
+
+                <img class="mb-4" src=https://cdn-icons-png.flaticon.com/512/335/335066.png alt=""
+                     width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+                <div class="form-floating">
+                    <input name="username"
+                           th:value="${username}"
+                           type="text" class="form-control" id="floatingInput" placeholder="username"
+                           wtx-context="9E0D6006-D946-49DB-AA0D-8FD9B58D432A">
+                    <label for="floatingInput">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input name="password" type="password" class="form-control" id="floatingPassword"
+                           placeholder="password" wtx-context="70B84895-744D-4846-8983-7935F7FF0300">
+                    <label for="floatingPassword">Password</label>
+                </div>
+
+                <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                    Invalid username or password
+                </p>
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me" wtx-context="3D4A104F-B3DC-4228-BB5D-0C8CDE41D561">
+                        Remember me
+                    </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}"/>
+</body>
+</html>
