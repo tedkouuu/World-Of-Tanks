@@ -1,8 +1,7 @@
-/* Existing global styles */
 body {
     display: flex;
     flex-direction: column;
-    font-family: "Montserrat", sans-serif; /* Fixed typo */
+    font-family: "Montserrat", sans-serif;
 }
 
 .jumbotron {
@@ -68,7 +67,7 @@ form.main-form {
 }
 
 #h1home {
-    background-color: black;
+    background-color: rgba(34, 34, 34, 0.8);
     color: white;
     opacity: 0.9;
     border-radius: 5px;
