@@ -121,7 +121,7 @@ h1 {
 /* New Navigation Styles */
 .navbar {
     background: linear-gradient(135deg, #2c3e50, #000000);
-    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
     padding: 0.5rem 1rem;
     font-family: 'Montserrat', sans-serif;
 }
@@ -159,19 +159,19 @@ h1 {
 }
 
 #languageNav .custom-select {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 1.75rem 0.375rem 0.75rem;
 }
 
 #languageNav .custom-select:focus {
-    box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
 }
 
 .navbar-toggler {
-    border-color: rgba(255,255,255,0.3);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .navbar-toggler-icon {
@@ -179,18 +179,18 @@ h1 {
 }
 
 .btn-outline-light {
-    border-color: rgba(255,255,255,0.5);
-    color: rgba(255,255,255,0.8);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .btn-outline-light:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
 @media (max-width: 992px) {
     .navbar-collapse {
-        background: rgba(0,0,0,0.95);
+        background: rgba(0, 0, 0, 0.95);
         padding: 1rem;
         margin-top: 0.5rem;
         border-radius: 5px;

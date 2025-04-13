@@ -48,19 +48,6 @@
                 </a>
             </li>
 
-            <!-- Admin -->
-            <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                    <i class="fas fa-user-shield mr-1"></i> Admin
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" th:text="#{navbar_edit_users}" href="/users/edit"></a>
-                    <a class="dropdown-item" th:text="#{navbar_delete_users}" href="/users/delete"></a>
-                    <a class="dropdown-item" th:text="#{navbar_edit_tank}" href="/tank/edit"></a>
-                    <a class="dropdown-item" th:text="#{navbar_delete_tank}" href="/tank/delete"></a>
-                </div>
-            </li>
-
             <!-- User Tanks -->
             <li class="nav-item" sec:authorize="hasRole('USER')">
                 <a class="nav-link" th:text="#{navbar_edit_tank}" href="/user/role/tank/edit">Edit Tanks</a>
