@@ -4,7 +4,7 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1%2B-brightgreen)](https://spring.io)
 [![Coverage](https://img.shields.io/badge/Line%20Coverage-63%25-yellowgreen)](https://testing.com)
 
-A Spring Boot web application for tank enthusiasts to battle with style! Features secure authentication, real-time gameplay mechanics, and responsive design.
+A Spring Boot web application for tank enthusiasts to battle with style! Features secure authentication, real-time gameplay mechanics, and responsive design
 
 ## 🚀 Features
 
