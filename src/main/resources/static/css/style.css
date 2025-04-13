@@ -1,8 +1,8 @@
+/* Existing global styles */
 body {
     display: flex;
     flex-direction: column;
-    font-family: "Monstserrat";
-
+    font-family: "Montserrat", sans-serif; /* Fixed typo */
 }
 
 .jumbotron {
@@ -10,7 +10,7 @@ body {
 }
 
 .bg-blur {
-    background-color: rgba(0, 0, 0, 0.7); /* Black w/opacity/see-through */
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 body {
@@ -27,8 +27,7 @@ body {
 }
 
 .bg-text {
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
@@ -37,7 +36,6 @@ body {
     padding: 20px;
     text-align: center;
 }
-
 
 td, th {
     padding: 3px 8px;
@@ -70,7 +68,6 @@ form.main-form {
 }
 
 #h1home {
-
     background-color: black;
     color: white;
     opacity: 0.9;
@@ -80,7 +77,6 @@ form.main-form {
 }
 
 .customSpan {
-
     text-align: center;
     margin: 0 auto;
 }
@@ -91,22 +87,12 @@ form.main-form {
 
 a {
     color: white;
-}
-
-
-nav.navbar {
-    background-color: black;
-}
-
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    transition: color 0.3s ease;
 }
 
 a:hover {
     color: lightgray;
+    text-decoration: none;
 }
 
 h1 {
@@ -128,21 +114,100 @@ h1 {
     margin-bottom: 100px;
 }
 
-#languageNav {
-    margin-left: 9px;
-    margin-top: 7px;
-}
-
 #searchIcon {
     width: 20px;
 }
 
+/* New Navigation Styles */
+.navbar {
+    background: linear-gradient(135deg, #2c3e50, #000000);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    padding: 0.5rem 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
 
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
 
+.navbar .nav-link {
+    padding: 0.8rem 1.2rem !important;
+    position: relative;
+    transition: all 0.3s ease;
+}
 
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
 
+.navbar .nav-link:hover::after {
+    width: 70%;
+    left: 15%;
+}
 
+.navbar .text-white:hover {
+    color: #ff0000 !important;
+    transition: color 0.3s ease;
+}
 
+#languageNav .custom-select {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+}
 
+#languageNav .custom-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
+}
 
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.3);
+}
 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.btn-outline-light {
+    border-color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.8);
+}
+
+.btn-outline-light:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background: rgba(0,0,0,0.95);
+        padding: 1rem;
+        margin-top: 0.5rem;
+        border-radius: 5px;
+    }
+
+    .nav-link {
+        padding: 0.5rem 0 !important;
+    }
+
+    .dropdown-menu {
+        background: transparent;
+        border: none;
+        padding-left: 1rem;
+    }
+
+    #languageNav {
+        margin-top: 1rem;
+        padding-left: 0.5rem;
+    }
+}
