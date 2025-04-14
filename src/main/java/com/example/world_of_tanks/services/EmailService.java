@@ -1,19 +1,19 @@
-package com.example.world_of_tanks.services;
-
-import org.springframework.context.MessageSource;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.util.Locale;
-
-@Service
-public class EmailService {
-
+//package com.example.world_of_tanks.services;
+//
+//import org.springframework.context.MessageSource;
+//import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.javamail.MimeMessageHelper;
+//import org.springframework.stereotype.Service;
+//import org.thymeleaf.TemplateEngine;
+//import org.thymeleaf.context.Context;
+//
+//import javax.mail.MessagingException;
+//import javax.mail.internet.MimeMessage;
+//import java.util.Locale;
+//
+//@Service
+//public class EmailService {
+//
 //    private final TemplateEngine templateEngine;
 //    private final MessageSource messageSource;
 //    private final JavaMailSender javaMailSender;
@@ -60,5 +60,5 @@ public class EmailService {
 //        ctx.setVariable("userName", userName);
 //        return templateEngine.process("email/registration", ctx);
 //    }
-
-}
+//
+//}
