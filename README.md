@@ -64,3 +64,6 @@ Get a quick look at the application's key pages:
    ```bash
    git clone https://github.com/your-username/world-of-tanks.git
    cd world-of-tanks
+
+2. **Start MailHog SMTP Server**
+docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
