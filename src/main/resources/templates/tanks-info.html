@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>World_Of_Tanks Application</title>
     <th:block th:replace="~{fragments/head}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/tanks-info.css}">
 </head>
-
 <body>
 
 <header th:include="~{fragments/navigation}"></header>
+
 <div class="container">
     <h2 class="text-center text-white">Tanks info</h2>
 
+    <div id="tanksContainer"
+         class="offers row mx-auto d-flex flex-row justify-content-center"
+         style="margin-top: 40px;">
 
-    <div class="offers row mx-auto d-flex flex-row justify-content-center" style="margin-top: 40px;">
-
-        <div th:each="tank: ${allTanks}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
+        <div th:each="tank: ${allTanks}"
+             class="offer card col-sm-6 col-md-3 col-lg-2 m-1 p-0">
             <div class="card-img-top-wrapper">
                 <img class="card-img-top" src="/images/tank-defender.jpg" alt="Tank image">
             </div>
@@ -30,11 +32,16 @@
                 </li>
             </ul>
         </div>
-        <h3 th:if="${allTanks.size == 0}" class="text-info">There are no tanks to show</h3>
+
+        <h3 th:if="${allTanks.size == 0}" class="text-info">
+            There are no tanks to show
+        </h3>
     </div>
 
-    <th:block th:include="~{/fragments/footer}"/>
+    <div id="pagination" class="pagination"></div>
+
 </div>
 
+<script th:src="@{/js/pagination.js}"></script>
 </body>
 </html>
