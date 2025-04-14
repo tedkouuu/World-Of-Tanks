@@ -1,0 +1,114 @@
+/* Reset и базови настройки за html и body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    background: url("/images/tank.jpg") center center no-repeat fixed;
+    background-size: cover;
+    background-color: #000;
+}
+
+/* Секция Masthead */
+.masthead {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.masthead .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+/* Основен контейнер за съдържанието */
+.container {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+}
+
+/* Заглавие за търсенето */
+h2#searchH2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+}
+
+/* Формата за търсене */
+#searchForm {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 3rem;
+}
+
+/* Стилове за елементите във формата */
+.form-control {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 25px;
+    margin: 0 10px 10px;
+    padding: 12px 25px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.form-control:focus {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+    outline: none;
+}
+
+/* Стилове за основния бутон */
+.btn-primary {
+    background: #007bff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+/* Анимация за плавно появяване */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Адаптивни настройки за устройства с максимална ширина 768px */
+@media (max-width: 768px) {
+    #searchForm {
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-control {
+        width: 100% !important;
+    }
+}
