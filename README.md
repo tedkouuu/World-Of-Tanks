@@ -68,4 +68,4 @@ Get a quick look at the application's key pages:
 2. **Start MailHog SMTP Server**
 
 ```bash
-   cd world-of-tanksdocker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+   docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
