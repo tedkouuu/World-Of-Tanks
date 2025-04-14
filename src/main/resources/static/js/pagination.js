@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tanksContainer = document.getElementById("tanksContainer");
-    // Get all tank card elements (assuming they have the class "offer")
     const tankCards = Array.from(tanksContainer.getElementsByClassName("offer"));
     const paginationContainer = document.getElementById("pagination");
 

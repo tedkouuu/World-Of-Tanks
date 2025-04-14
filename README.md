@@ -4,7 +4,27 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1%2B-brightgreen)](https://spring.io)
 [![Coverage](https://img.shields.io/badge/Line%20Coverage-63%25-yellowgreen)](https://testing.com)
 
-A Spring Boot web application for tank enthusiasts to battle with style! Features secure authentication, real-time gameplay mechanics, and responsive design
+A Spring Boot web application for tank enthusiasts to battle with style! Featuring secure authentication, real-time gameplay mechanics, and a responsive design.
+
+---
+
+## Screenshots
+
+Get a quick look at the application's key pages:
+
+### Start Page
+![Start Page Screenshot](src/main/resources/static/images/index.png)
+
+### Search Page
+![Search Page Screenshot](src/main/resources/static/images/search.png)
+
+### Info Page
+![Info Page Screenshot](src/main/resources/static/images/info.png)
+
+### Home Page
+![Home Page Screenshot](src/main/resources/static/images/home.png)
+
+---
 
 ## 🚀 Features
 
@@ -29,13 +49,18 @@ A Spring Boot web application for tank enthusiasts to battle with style! Feature
 - 63% line coverage with JUnit/Mockito
 - Comprehensive exception handling
 
+---
+
 ## ⚙️ Installation
 
 ### Prerequisites
-- Java 17+
-- Docker (for SMTP server)
-- MySQL 8+
+- **Java 17+**
+- **Docker** (for SMTP server)
+- **MySQL 8+**
 
-1. **Start MailHog SMTP Server**
-```bash
-docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+### Steps to Get Started
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/world-of-tanks.git
+   cd world-of-tanks
