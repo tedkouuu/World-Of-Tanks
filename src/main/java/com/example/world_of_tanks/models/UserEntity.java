@@ -1,7 +1,7 @@
 package com.example.world_of_tanks.models;
 
 
-import javax.persistence.*;;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
