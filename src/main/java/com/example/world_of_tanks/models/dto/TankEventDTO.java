@@ -1,6 +1,8 @@
 package com.example.world_of_tanks.models.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TankEventDTO {
 
@@ -11,11 +13,12 @@ public class TankEventDTO {
     private long power;
     private LocalDate created;
     private String action;
+    private LocalTime timestamp;
 
     public TankEventDTO() {
     }
 
-    public TankEventDTO(String tankName, String username, String category, long health, long power, LocalDate created, String action) {
+    public TankEventDTO(String tankName, String username, String category, long health, long power, LocalDate created, String action, LocalTime timestamp) {
         this.tankName = tankName;
         this.username = username;
         this.category = category;
@@ -23,8 +26,8 @@ public class TankEventDTO {
         this.power = power;
         this.created = created;
         this.action = action;
+        this.timestamp = timestamp;
     }
-
 
     public String getTankName() {
         return tankName;
@@ -80,5 +83,13 @@ public class TankEventDTO {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public LocalTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

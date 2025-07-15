@@ -7,6 +7,8 @@ import com.example.world_of_tanks.services.TankService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Component
@@ -33,7 +35,8 @@ public class TankStatusScheduler {
                     tank.getHealth(),
                     tank.getPower(),
                     tank.getCreated(),
-                    "PERIODIC_TANK_STATUS"
+                    "PERIODIC_TANK_STATUS",
+                    LocalTime.now()
             );
 
             kafkaProducer.sendTankEvent(event);
