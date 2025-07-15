@@ -1,4 +1,3 @@
-// ApacheKafkaConfig.java
 package com.example.world_of_tanks.configuration;
 
 import org.apache.kafka.clients.admin.AdminClient;
