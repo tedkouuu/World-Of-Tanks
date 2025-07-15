@@ -25,12 +25,16 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.
+                csrf(csrf ->
+                        csrf.ignoringAntMatchers("/api/**")
+                ).
                 // define which requests are allowed and which not
                         authorizeRequests().
                 // everyone can download static resources (css, js, images)
                         requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
                 // everyone can login and register
                         antMatchers("/", "/users/login", "/users/register").permitAll().
+                antMatchers("/api/**").permitAll().
                 antMatchers("/tanks/battle").authenticated().
                 antMatchers("/users/tank/edit").hasRole(UserRoleEnum.USER.name()).
                 antMatchers("/user/role/tank/edit").hasRole(UserRoleEnum.USER.name()).

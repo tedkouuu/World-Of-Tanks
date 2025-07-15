@@ -3,12 +3,13 @@ logging:
     blog: WARN
     org: WARN
     org.hibernate.SQL: DEBUG
+
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/world_of_tanks?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     username: root
+    password: 1234
 
   jpa:
     hibernate:
@@ -18,11 +19,16 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
 
+  kafka:
+    bootstrap-servers: 192.168.2.119:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    admin:
+      auto-create: true
+
 mail:
-  host: "localhost"
+  host: localhost
   port: 1025
-  username: "WorldOfTanks@gmail.com"
-  password: "topsecret"
-
-
-
+  username: WorldOfTanks@gmail.com
+  password: topsecret
