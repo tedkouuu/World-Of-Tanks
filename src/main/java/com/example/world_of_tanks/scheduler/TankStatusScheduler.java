@@ -7,7 +7,6 @@ import com.example.world_of_tanks.services.TankService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class TankStatusScheduler {
         this.tankService = tankService;
     }
 
-    @Scheduled(fixedRate = 20_000)
+    @Scheduled(fixedRate = 3_600_000)
     public void sendTankStatusUpdate() {
         List<Tank> allTanks = tankService.findAll();
 
