@@ -43,7 +43,5 @@ public class ApacheKafkaProducerService {
                     }
                 }
         );
-
-        producer.flush();
     }
 }
