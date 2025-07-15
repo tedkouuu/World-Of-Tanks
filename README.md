@@ -32,6 +32,7 @@ Get a quick look at the application's key pages:
 - **MySQL Database** with JPA/Hibernate integration
 - **Spring Security** with role-based access (ADMIN/USER)
 - **Dockerized SMTP Server** (MailHog) for email testing
+- **Kafka** for message logging
 - Model Mapper for DTO conversions
 - Maintenance Interceptor for system updates
 - Scheduler for automated tasks
@@ -57,6 +58,7 @@ Get a quick look at the application's key pages:
 - **Java 17+**
 - **Docker** (for SMTP server)
 - **MySQL 8+**
+- **Kafka**
 
 ### Steps to Get Started
 
@@ -65,7 +67,22 @@ Get a quick look at the application's key pages:
    git clone https://github.com/your-username/world-of-tanks.git
    cd world-of-tanks
 
-2. **Start MailHog SMTP Server**
+2. **Download and Extract Kafka**
+```bash
+wget https://downloads.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+
+tar -xzf kafka_2.13-3.7.0.tgz
+cd kafka_2.13-3.7.0
+
+bin/kafka-server-start.sh config/server.propertiess
+
+```
+3. **Start MailHog SMTP Server**
 
 ```bash
    docker run -d -p 1025:1025 -p 8025:8025 mailhog/mailhog
+
+
+
+
+
