@@ -50,6 +50,11 @@ Get a quick look at the application's key pages:
 - 63% line coverage with JUnit/Mockito
 - Comprehensive exception handling
 
+### Monitoring
+- **Prometheus** for metrics collection from Kafka
+- **Grafana** dashboards for visualizing Kafka metrics
+- JMX exporter for Kafka performance monitoring
+
 ---
 
 ## ⚙️ Installation
