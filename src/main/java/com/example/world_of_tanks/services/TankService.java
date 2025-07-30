@@ -11,9 +11,11 @@ import com.example.world_of_tanks.repositories.TankRepository;
 import com.example.world_of_tanks.repositories.TankSpecification;
 import com.example.world_of_tanks.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,10 +81,20 @@ public class TankService {
         Tank tankToEdit = tankToDelete.get();
 
         tankRepository.delete(tankToEdit);
-
-
     }
 
+    public void deleteTank(Long id, UserDetails userDetails) {
+        Tank tank = tankRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tank not found with id: " + id));
+
+        String currentUsername = userDetails.getUsername();
+
+        if (!tank.getUser().getUsername().equals(currentUsername)) {
+            throw new AccessDeniedException("You are not the owner of this tank.");
+        }
+
+        tankRepository.delete(tank);
+    }
 
     public List<TankDTO> getTanksOwnedBy(String ownerUsername) {
 
@@ -144,38 +156,6 @@ public class TankService {
         this.tankRepository.save(tank);
     }
 
-
-    public boolean editUserTank(EditUserTankDTO editUserTankDTO, UserDetails userDetails) {
-
-        List<Tank> allUserTanks = this.tankRepository.findByUserUsername(userDetails.getUsername());
-
-        Optional<Tank> tank = this.tankRepository.findByName(editUserTankDTO.getOldName());
-
-        Optional<Tank> checkNewTank = this.tankRepository.findByName(editUserTankDTO.getNewName());
-
-        if (checkNewTank.isPresent()) {
-            return false;
-        }
-
-        if (allUserTanks.isEmpty() || tank.isEmpty()) {
-
-            return false;
-        }
-
-        if (!allUserTanks.contains(tank.get())) {
-
-            return false;
-        }
-
-        Tank tankToSet = tank.get();
-
-        tankToSet.setName(editUserTankDTO.getNewName());
-
-        this.tankRepository.save(tankToSet);
-
-        return true;
-    }
-
     public boolean deleteUserTank(DeleteUserTankDTO deleteUserTankDTO, UserDetails userDetails) {
 
         List<Tank> allUserTanks = this.tankRepository.findByUserUsername(userDetails.getUsername());
@@ -223,12 +203,14 @@ public class TankService {
 
             UserEntity userEntity = byUsername.get();
 
-            TankInfoDTO tankDTO = new TankInfoDTO().setPower(current.getPower())
+            TankInfoDTO tankDTO = new TankInfoDTO()
+                    .setId(current.getId())
+                    .setPower(current.getPower())
                     .setCreated(current.getCreated())
-                    .setHealth(current.getHealth()).setName(current.getName())
+                    .setHealth(current.getHealth())
+                    .setName(current.getName())
                     .setCategoryName(current.getCategory().getName())
                     .setOwnerUsername(userEntity.getUsername());
-
 
             tanksToShow.add(tankDTO);
 

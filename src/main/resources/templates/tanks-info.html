@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>World_Of_Tanks Application</title>
     <th:block th:replace="~{fragments/head}"></th:block>
@@ -16,30 +16,39 @@
          class="offers row mx-auto d-flex flex-row justify-content-center"
          style="margin-top: 40px;">
 
-        <div th:each="tank: ${allTanks}"
-             class="offer card col-sm-6 col-md-3 col-lg-2 m-1 p-0">
-            <div class="card-img-top-wrapper">
-                <img class="card-img-top" src="/images/tank-defender.jpg" alt="Tank image">
-            </div>
-            <ul class="tank-details list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="card-text"><span th:text="'Name: ' + ${tank.name}"></span></div>
-                    <div class="card-text"><span th:text="'Power: ' + ${tank.power}"></span></div>
-                    <div class="card-text"><span th:text="'Health: ' + ${tank.health}"></span></div>
-                    <div class="card-text"><span th:text="'Created on: ' + ${tank.created}"></span></div>
-                    <div class="card-text"><span th:text="'Category: ' + ${tank.categoryName}"></span></div>
-                    <div class="card-text"><span th:text="'Owner: ' + ${tank.ownerUsername}"></span></div>
-                </li>
-            </ul>
-        </div>
+        <th:block th:each="tank : ${allTanks}">
+            <div class="offer card col-sm-6 col-md-3 col-lg-2 m-1 p-0">
+                <div class="card-img-top-wrapper">
+                    <img class="card-img-top" src="/images/tank-defender.jpg" alt="Tank image">
+                </div>
+                <ul class="tank-details list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="card-text"><span th:text="'Name: ' + ${tank.name}"></span></div>
+                        <div class="card-text"><span th:text="'Power: ' + ${tank.power}"></span></div>
+                        <div class="card-text"><span th:text="'Health: ' + ${tank.health}"></span></div>
+                        <div class="card-text"><span th:text="'Created on: ' + ${tank.created}"></span></div>
+                        <div class="card-text"><span th:text="'Category: ' + ${tank.categoryName}"></span></div>
+                        <div class="card-text"><span th:text="'Owner: ' + ${tank.ownerUsername}"></span></div>
 
-        <h3 th:if="${allTanks.size == 0}" class="text-info">
+                        <div class="button-group">
+                            <div class="button-group" sec:authorize="isAuthenticated()">
+                                <a th:href="@{'/tanks/edit/' + ${tank.id}}" class="edit-btn">Edit</a>
+                                <form th:action="@{'/tanks/delete/' + ${tank.id}}" method="post">
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </th:block>
+
+        <h3 th:if="${allTanks.size() == 0}" class="text-info">
             There are no tanks to show
         </h3>
     </div>
 
     <div id="pagination" class="pagination"></div>
-
 </div>
 
 <script th:src="@{/js/pagination.js}"></script>

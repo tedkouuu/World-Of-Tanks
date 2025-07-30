@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -94,22 +95,6 @@ public class TankController {
     @GetMapping("/user/role/tank/edit")
     public String getUserTankEdit() {
         return "user-tank-edit";
-    }
-
-    @PostMapping("/user/role/tank/edit")
-    public String edit(@Valid EditUserTankDTO editUserTankDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails) {
-
-        if (bindingResult.hasErrors() || !this.tankService.editUserTank(editUserTankDTO, userDetails)) {
-            redirectAttributes.addFlashAttribute("editUserTankDTO", editUserTankDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editUserTankDTO", bindingResult);
-
-            return "redirect:/user/role/tank/edit";
-        }
-
-        this.tankService.editUserTank(editUserTankDTO, userDetails);
-
-        return "redirect:/users/home";
-
     }
 
     @GetMapping("/tank/delete")
@@ -199,5 +184,12 @@ public class TankController {
         }
 
         return "tank-search";
+    }
+
+    @PostMapping("/tanks/delete/{id}")
+    public String deleteById(@PathVariable Long id,
+                             @AuthenticationPrincipal UserDetails user) {
+        tankService.deleteTank(id, user);
+        return "redirect:/tanks/info";
     }
 }
