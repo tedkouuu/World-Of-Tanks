@@ -1,7 +1,10 @@
 package com.example.world_of_tanks.web;
 
+import com.example.world_of_tanks.models.Tank;
 import com.example.world_of_tanks.models.dto.*;
+import com.example.world_of_tanks.repositories.TankRepository;
 import com.example.world_of_tanks.services.TankService;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,16 +16,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class TankController {
 
     private final TankService tankService;
+    private final TankRepository tankRepository;
 
-    public TankController(TankService tankService) {
+    public TankController(TankService tankService, TankRepository tankRepository) {
         this.tankService = tankService;
+        this.tankRepository = tankRepository;
     }
 
     @ModelAttribute("addTankDTO")
@@ -190,6 +197,51 @@ public class TankController {
     public String deleteById(@PathVariable Long id,
                              @AuthenticationPrincipal UserDetails user) {
         tankService.deleteTank(id, user);
+        return "redirect:/tanks/info";
+    }
+
+    @GetMapping("/tanks/edit/{id}")
+    public String editTankForm(@PathVariable Long id, Model model, Principal principal) {
+        Tank tank = tankRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tank not found"));
+
+        if (!tank.getUser().getUsername().equals(principal.getName())) {
+            throw new AccessDeniedException("You are not the owner of this tank.");
+        }
+        EditTankDTO editTankDTO = new EditTankDTO()
+                .setId(tank.getId())
+                .setName(tank.getName())
+                .setHealth(tank.getHealth())
+                .setPower(tank.getPower());
+
+        model.addAttribute("editTankDTO", editTankDTO);
+
+        return "tank-edit";
+    }
+
+    @PostMapping("/tanks/edit/{id}")
+    public String processEditTank(@PathVariable Long id,
+                                  @ModelAttribute("editTankDTO") @Valid EditTankDTO editTankDTO,
+                                  BindingResult bindingResult,
+                                  Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return "tank-edit";
+        }
+
+        Tank tank = tankRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tank not found"));
+
+        if (!tank.getUser().getUsername().equals(principal.getName())) {
+            throw new AccessDeniedException("You are not the owner of this tank.");
+        }
+
+        tank.setName(editTankDTO.getName());
+        tank.setHealth(editTankDTO.getHealth());
+        tank.setPower(editTankDTO.getPower());
+
+        tankRepository.save(tank);
+
         return "redirect:/tanks/info";
     }
 }

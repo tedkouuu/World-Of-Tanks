@@ -1,7 +1,5 @@
 package com.example.world_of_tanks.models.dto;
 
-import com.example.world_of_tanks.models.validation.TankExist;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -9,9 +7,10 @@ import javax.validation.constraints.Size;
 
 public class EditTankDTO {
 
+    private long id;
+
     @NotBlank(message = "Tank name is required!")
-    @Size(min = 2, max = 10,message = "Tank name must be between 2 and 10 characters")
-    @TankExist(message = "Tank with this name doesn't exist!")
+    @Size(min = 2, max = 10, message = "Tank name must be between 2 and 10 characters")
     private String name;
 
     @Positive
@@ -46,6 +45,15 @@ public class EditTankDTO {
 
     public EditTankDTO setHealth(long health) {
         this.health = health;
+        return this;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public EditTankDTO setId(long id) {
+        this.id = id;
         return this;
     }
 }
