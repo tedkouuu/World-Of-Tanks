@@ -33,6 +33,7 @@ Get a quick look at the application's key pages:
 - **Spring Security** with role-based access (ADMIN/USER)
 - **Dockerized SMTP Server** (MailHog) for email testing
 - **Kafka** for message logging
+- **MongoDB** for tank events logs
 - Model Mapper for DTO conversions
 - Maintenance Interceptor for system updates
 - Scheduler for automated tasks
@@ -64,6 +65,8 @@ Get a quick look at the application's key pages:
 - **Docker** (for SMTP server)
 - **MySQL 8+**
 - **Kafka**
+- **MongoDB**
+
 
 ### Steps to Get Started
 
