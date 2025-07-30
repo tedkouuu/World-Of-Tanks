@@ -22,7 +22,7 @@ public class TankStatusScheduler {
         this.tankService = tankService;
     }
 
-    @Scheduled(fixedRate = 100_000_000)
+    @Scheduled(fixedRate = 100_100_100)
     public void sendTankStatusUpdate() {
         List<Tank> allTanks = tankService.findAll();
 
