@@ -14,7 +14,7 @@ public class MongoEventLogger {
         this.collection = db.getCollection("tank_event_logs");
     }
 
-    public void logEvent(TankEventLog event) {
+    public void addEvent(TankEventLog event) {
         Document doc = new Document()
                 .append("tankId", event.getTankId())
                 .append("eventType", event.getEventType())

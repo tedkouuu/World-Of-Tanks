@@ -5,6 +5,7 @@ import com.example.world_of_tanks.models.Tank;
 import com.example.world_of_tanks.models.UserEntity;
 import com.example.world_of_tanks.models.dto.*;
 import com.example.world_of_tanks.models.enums.CategoryEnum;
+import com.example.world_of_tanks.mongoDbService.TankLogService;
 import com.example.world_of_tanks.repositories.CategoryRepository;
 import com.example.world_of_tanks.repositories.TankRepository;
 import com.example.world_of_tanks.repositories.TankSpecification;
@@ -47,7 +48,9 @@ public class TankService {
 
         tankModelMapper.setCategory(category);
 
-        this.tankRepository.save(tankModelMapper);
+        Tank saved = this.tankRepository.save(tankModelMapper);
+
+        TankLogService.log("CREATE", saved);
 
     }
 
