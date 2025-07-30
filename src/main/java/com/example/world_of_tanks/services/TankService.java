@@ -57,22 +57,46 @@ public class TankService {
     }
 
     public boolean editTank(EditTankDTO editTankDTO) {
+        Optional<Tank> tankOpt = this.tankRepository.findById(editTankDTO.getId());
 
-        Optional<Tank> tank = this.tankRepository.findByName(editTankDTO.getName());
-
-        if (tank.isEmpty()) {
+        if (tankOpt.isEmpty()) {
             return false;
         }
 
-        Tank tankToEdit = tank.get();
+        Tank tankToEdit = tankOpt.get();
 
-        tankToEdit.setHealth(editTankDTO.getHealth()).setPower(editTankDTO.getPower());
+        tankToEdit.setHealth(editTankDTO.getHealth())
+                .setPower(editTankDTO.getPower())
+                .setName(editTankDTO.getName()); // ако позволяваш промяна на името
 
-        tankRepository.save(tankToEdit);
+        Tank saved = this.tankRepository.save(tankToEdit);
+
+        TankLogService.log("EDIT", saved);
 
         return true;
-
     }
+
+    public Tank getOwnedTankById(Long id, String username) {
+        Tank tank = tankRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tank not found"));
+
+        if (!tank.getUser().getUsername().equals(username)) {
+            throw new AccessDeniedException("You are not the owner of this tank.");
+        }
+
+        return tank;
+    }
+
+    public void updateTank(Tank tank, EditTankDTO dto) {
+        tank.setName(dto.getName());
+        tank.setPower(dto.getPower());
+        tank.setHealth(dto.getHealth());
+
+        Tank saved = tankRepository.save(tank);
+
+        TankLogService.log("EDIT", saved);
+    }
+
 
     public void deleteTank(DeleteTankDTO deleteTankDTO) {
 
@@ -80,6 +104,7 @@ public class TankService {
 
         Tank tankToEdit = tankToDelete.get();
 
+        TankLogService.log("DELETE", tankToDelete.get());
         tankRepository.delete(tankToEdit);
     }
 
@@ -93,6 +118,7 @@ public class TankService {
             throw new AccessDeniedException("You are not the owner of this tank.");
         }
 
+        TankLogService.log("DELETE", tank);
         tankRepository.delete(tank);
     }
 

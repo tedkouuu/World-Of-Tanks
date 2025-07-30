@@ -2,6 +2,7 @@ package com.example.world_of_tanks.web;
 
 import com.example.world_of_tanks.models.Tank;
 import com.example.world_of_tanks.models.dto.*;
+import com.example.world_of_tanks.mongoDbService.TankLogService;
 import com.example.world_of_tanks.repositories.TankRepository;
 import com.example.world_of_tanks.services.TankService;
 import org.springframework.security.access.AccessDeniedException;
@@ -202,12 +203,8 @@ public class TankController {
 
     @GetMapping("/tanks/edit/{id}")
     public String editTankForm(@PathVariable Long id, Model model, Principal principal) {
-        Tank tank = tankRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Tank not found"));
+        Tank tank = tankService.getOwnedTankById(id, principal.getName());
 
-        if (!tank.getUser().getUsername().equals(principal.getName())) {
-            throw new AccessDeniedException("You are not the owner of this tank.");
-        }
         EditTankDTO editTankDTO = new EditTankDTO()
                 .setId(tank.getId())
                 .setName(tank.getName())
@@ -229,18 +226,9 @@ public class TankController {
             return "tank-edit";
         }
 
-        Tank tank = tankRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Tank not found"));
+        Tank tank = tankService.getOwnedTankById(id, principal.getName());
 
-        if (!tank.getUser().getUsername().equals(principal.getName())) {
-            throw new AccessDeniedException("You are not the owner of this tank.");
-        }
-
-        tank.setName(editTankDTO.getName());
-        tank.setHealth(editTankDTO.getHealth());
-        tank.setPower(editTankDTO.getPower());
-
-        tankRepository.save(tank);
+        tankService.updateTank(tank, editTankDTO);
 
         return "redirect:/tanks/info";
     }
