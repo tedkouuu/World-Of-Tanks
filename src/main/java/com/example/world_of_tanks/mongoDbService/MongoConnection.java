@@ -6,7 +6,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoConnection {
 
-    private static final String CONNECTION_STRING = "mongodb://192.168.2.109:27017";
+    private static final String CONNECTION_STRING = "mongodb://teo:12345678@192.168.2.109:27017/?authSource=admin";
+
     private static final String DATABASE_NAME = "world-of-tanks";
 
     private static final MongoClient mongoClient = MongoClients.create(CONNECTION_STRING);

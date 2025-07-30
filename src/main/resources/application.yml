@@ -1,7 +1,7 @@
 logging:
   level:
-    blog: WARN
     org: WARN
+    blog: WARN
     org.hibernate.SQL: DEBUG
 
 spring:
@@ -27,8 +27,12 @@ spring:
     admin:
       auto-create: true
 
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+
 mail:
   host: localhost
   port: 1025
   username: WorldOfTanks@gmail.com
   password: topsecret
+
