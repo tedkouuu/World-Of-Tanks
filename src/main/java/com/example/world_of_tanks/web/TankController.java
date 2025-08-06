@@ -2,10 +2,8 @@ package com.example.world_of_tanks.web;
 
 import com.example.world_of_tanks.models.Tank;
 import com.example.world_of_tanks.models.dto.*;
-import com.example.world_of_tanks.mongoDbService.TankLogService;
 import com.example.world_of_tanks.repositories.TankRepository;
 import com.example.world_of_tanks.services.TankService;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -26,11 +23,9 @@ import java.util.List;
 public class TankController {
 
     private final TankService tankService;
-    private final TankRepository tankRepository;
 
-    public TankController(TankService tankService, TankRepository tankRepository) {
+    public TankController(TankService tankService) {
         this.tankService = tankService;
-        this.tankRepository = tankRepository;
     }
 
     @ModelAttribute("addTankDTO")
