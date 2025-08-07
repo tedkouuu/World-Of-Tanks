@@ -13,10 +13,11 @@ public class ApacheKafkaProducerService {
 
     private static final String TOPIC = "tank-events";
     private final KafkaProducer<String, String> producer;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
     public ApacheKafkaProducerService(KafkaProducer<String, String> producer) {
         this.producer = producer;
+
         this.objectMapper = new ObjectMapper();
         this.objectMapper.registerModule(new JavaTimeModule());
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -33,7 +34,6 @@ public class ApacheKafkaProducerService {
                     (metadata, ex) -> {
                         if (ex != null) {
                             System.err.printf("❌ Error sending message to topic %s: %s%n", TOPIC, ex.getMessage());
-                            ex.printStackTrace();
                         } else {
                             System.out.printf("✅ Sent record to topic=%s partition=%d offset=%d key=%s%n",
                                     metadata.topic(), metadata.partition(), metadata.offset(), key);
@@ -41,8 +41,7 @@ public class ApacheKafkaProducerService {
                     }
             );
         } catch (Exception e) {
-            System.err.println("❌ Error serializing TankEventDTO: " + e.getMessage());
-            e.printStackTrace();
+            System.err.printf("❌ Kafka unavailable or serialization failed for tank: %s — %s%n", key, e.getMessage());
         }
     }
 }
