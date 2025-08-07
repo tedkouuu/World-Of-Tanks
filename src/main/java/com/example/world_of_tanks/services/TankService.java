@@ -100,7 +100,7 @@ public class TankService {
 
     public void deleteTank(DeleteTankDTO deleteTankDTO) {
 
-        Optional<Tank> tankToDelete = this.tankRepository.findByName(deleteTankDTO.getName());
+        Optional<Tank> tankToDelete  = this.tankRepository.findByName(deleteTankDTO.getName());
 
         Tank tankToEdit = tankToDelete.get();
 
