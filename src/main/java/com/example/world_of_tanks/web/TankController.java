@@ -25,27 +25,27 @@ public class TankController {
     }
 
     @ModelAttribute("addTankDTO")
-    public AddTankDTO initTankAddModel() {
+    public AddTankDTO addTankDTO() {
         return new AddTankDTO();
     }
 
     @ModelAttribute("editTankDTO")
-    public EditTankDTO editTankAddModel() {
+    public EditTankDTO editTankDTO() {
         return new EditTankDTO();
     }
 
     @ModelAttribute("editUserTankDTO")
-    public EditUserTankDTO editUserTankAddModel() {
+    public EditUserTankDTO editUserTankDTO() {
         return new EditUserTankDTO();
     }
 
     @ModelAttribute("deleteTankDTO")
-    public DeleteTankDTO deleteTankAddModel() {
+    public DeleteTankDTO deleteTankDTO() {
         return new DeleteTankDTO();
     }
 
     @ModelAttribute("deleteUserTankDTO")
-    public DeleteUserTankDTO deleteOwnedTank() {
+    public DeleteUserTankDTO deleteUserTankDTO() {
         return new DeleteUserTankDTO();
     }
 
@@ -55,7 +55,7 @@ public class TankController {
     }
 
     @GetMapping("/tank/add")
-    public String getTank() {
+    public String getAddTank() {
         return "tank-add";
     }
 
@@ -76,14 +76,14 @@ public class TankController {
     }
 
     @GetMapping("/tank/edit")
-    public String getEdit() {
+    public String getEditTank() {
         return "tank-edit";
     }
 
     @PostMapping("/tank/edit")
-    public String edit(@Valid EditTankDTO editTankDTO,
-                       BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+    public String editTank(@Valid EditTankDTO editTankDTO,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors() || !tankService.editTank(editTankDTO)) {
             redirectAttributes.addFlashAttribute("editTankDTO", editTankDTO);
@@ -94,13 +94,8 @@ public class TankController {
         return "redirect:/users/home";
     }
 
-    @GetMapping("/user/role/tank/edit")
-    public String getUserTankEdit() {
-        return "user-tank-edit";
-    }
-
     @GetMapping("/tanks/edit/{id}")
-    public String editTankForm(@PathVariable Long id, Model model, Principal principal) {
+    public String getEditTankById(@PathVariable Long id, Model model, Principal principal) {
         Tank tank = tankService.getOwnedTankById(id, principal.getName());
 
         EditTankDTO editTankDTO = new EditTankDTO()
@@ -130,14 +125,14 @@ public class TankController {
     }
 
     @GetMapping("/tank/delete")
-    public String getDelete() {
+    public String getDeleteTank() {
         return "tank-delete";
     }
 
     @PostMapping("/tank/delete")
-    public String delete(@Valid DeleteTankDTO deleteTankDTO,
-                         BindingResult bindingResult,
-                         RedirectAttributes redirectAttributes) {
+    public String deleteTank(@Valid DeleteTankDTO deleteTankDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("deleteTankDTO", deleteTankDTO);
@@ -149,8 +144,26 @@ public class TankController {
         return "redirect:/users/home";
     }
 
+    @PostMapping("/tanks/delete/{id}")
+    public String deleteTankById(@PathVariable Long id,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
+        tankService.deleteTank(id, userDetails);
+        return "redirect:/tanks/info";
+    }
+
+    @GetMapping("/tanks/delete/all")
+    public String getDeleteAll() {
+        return "delete-all-tanks";
+    }
+
+    @PostMapping("/tanks/delete/all")
+    public String deleteAllTanks(@AuthenticationPrincipal UserDetails userDetails) {
+        tankService.deleteAllTUserTanks(userDetails);
+        return "redirect:/tank/add";
+    }
+
     @GetMapping("/user/tank/delete")
-    public String getUserDelete() {
+    public String getUserTankDelete() {
         return "user-role-tank-delete";
     }
 
@@ -166,54 +179,30 @@ public class TankController {
             return "redirect:/user/tank/delete";
         }
 
-        tankService.deleteUserTank(deleteUserTankDTO, userDetails);
         return "redirect:/users/home";
     }
 
-    @GetMapping("/tanks/delete/all")
-    public String getDeleteAll() {
-        return "delete-all-tanks";
-    }
-
-    @PostMapping("/tanks/delete/all")
-    public String deleteAllTanks(@AuthenticationPrincipal UserDetails userDetails) {
-        tankService.deleteAllTUserTanks(userDetails);
-        return "redirect:/tank/add";
-    }
-
-    @PostMapping("/tanks/delete/{id}")
-    public String deleteById(@PathVariable Long id,
-                             @AuthenticationPrincipal UserDetails user) {
-        tankService.deleteTank(id, user);
-        return "redirect:/tanks/info";
-    }
-
     @GetMapping("/tanks/info")
-    public String showTanks(Model model) {
-        List<TankInfoDTO> allTanks = tankService.findAllTanks();
-        model.addAttribute("allTanks", allTanks);
+    public String getAllTanks(Model model) {
+        List<TankInfoDTO> tanks = tankService.findAllTanks();
+        model.addAttribute("allTanks", tanks);
         return "tanks-info";
     }
 
     @GetMapping("/tanks/search")
-    public String searchTankQuery(@Valid SearchTankDTO searchTankDTO,
+    public String searchTankQuery(@ModelAttribute("searchTankDTO") SearchTankDTO searchTankDTO,
                                   BindingResult bindingResult,
                                   Model model) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("searchTankDTO", searchTankDTO);
-            model.addAttribute("org.springframework.validation.BindingResult.searchTankDTO", bindingResult);
-            return "tank-search";
-        }
-
-        if (!model.containsAttribute("searchTankDTO")) {
-            model.addAttribute("searchTankDTO", searchTankDTO);
-        }
 
         if (!searchTankDTO.isEmpty()) {
             model.addAttribute("tanks", tankService.searchTanks(searchTankDTO));
         }
 
         return "tank-search";
+    }
+
+    @GetMapping("/user/role/tank/edit")
+    public String getUserTankEdit() {
+        return "user-tank-edit";
     }
 }

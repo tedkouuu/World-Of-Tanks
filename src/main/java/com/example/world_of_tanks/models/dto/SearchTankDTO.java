@@ -1,16 +1,13 @@
 package com.example.world_of_tanks.models.dto;
 
-import com.example.world_of_tanks.models.enums.CategoryEnum;
-
-import javax.validation.constraints.NotNull;
-
 public class SearchTankDTO {
 
     private String name;
+    private String health;
+    private String power;
 
-    private Integer health;
-
-    private Integer power;
+    public SearchTankDTO() {
+    }
 
     public String getName() {
         return name;
@@ -21,27 +18,43 @@ public class SearchTankDTO {
         return this;
     }
 
-    public Integer getHealth() {
+    public String getHealth() {
         return health;
     }
 
-    public SearchTankDTO setHealth(Integer health) {
+    public SearchTankDTO setHealth(String health) {
         this.health = health;
         return this;
     }
 
-    public SearchTankDTO setPower(Integer power) {
+    public String getPower() {
+        return power;
+    }
+
+    public SearchTankDTO setPower(String power) {
         this.power = power;
         return this;
     }
 
-    public Integer getPower() {
-        return power;
+    public boolean isEmpty() {
+        return (name == null || name.trim().isEmpty()) &&
+                (health == null || health.trim().isEmpty()) &&
+                (power == null || power.trim().isEmpty());
     }
 
-    public boolean isEmpty() {
-        return (name == null || name.isEmpty()) &&
-                health == null &&
-                power == null;
+    public Integer getHealthAsInteger() {
+        try {
+            return health != null && !health.trim().isEmpty() ? Integer.parseInt(health.trim()) : null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    public Integer getPowerAsInteger() {
+        try {
+            return power != null && !power.trim().isEmpty() ? Integer.parseInt(power.trim()) : null;
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

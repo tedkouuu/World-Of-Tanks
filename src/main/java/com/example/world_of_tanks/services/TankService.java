@@ -260,22 +260,44 @@ public class TankService {
                 .setCategory(realTank.getCategory()).setUser(realTank.getUser());
     }
 
-    public List<SearchTankDTO> searchTanks(SearchTankDTO searchTankDTO) {
+    public List<TankInfoDTO> searchTanks(SearchTankDTO searchTankDTO) {
+        String name = searchTankDTO.getName();
+        Integer health = searchTankDTO.getHealthAsInteger();
+        Integer power = searchTankDTO.getPowerAsInteger();
 
-        List<SearchTankDTO> toReturn = new ArrayList<>();
+        List<Tank> result = tankRepository.findAll().stream()
+                .filter(tank -> {
+                    boolean matches = true;
 
-        List<Tank> all = this.tankRepository.findAll(new TankSpecification(searchTankDTO));
+                    if (name != null && !name.trim().isEmpty()) {
+                        matches = matches && tank.getName().toLowerCase().contains(name.trim().toLowerCase());
+                    }
 
-        for (Tank tank : all) {
+                    if (health != null) {
+                        matches = matches && tank.getHealth() >= health;
+                    }
 
-            SearchTankDTO map = modelMapper.map(tank, SearchTankDTO.class);
+                    if (power != null) {
+                        matches = matches && tank.getPower() <= power;
+                    }
 
-            toReturn.add(map);
+                    return matches;
+                })
+                .toList();
 
-        }
+        return result.stream()
+                .map(this::mapToTankInfoDTO)
+                .toList();
 
-        return toReturn;
 
+    }
+
+    private TankInfoDTO mapToTankInfoDTO(Tank tank) {
+        return new TankInfoDTO()
+                .setId(tank.getId())
+                .setName(tank.getName())
+                .setHealth(tank.getHealth())
+                .setPower(tank.getPower());
     }
 }
 
