@@ -151,17 +151,6 @@ public class TankController {
         return "redirect:/tanks/info";
     }
 
-    @GetMapping("/tanks/delete/all")
-    public String getDeleteAll() {
-        return "delete-all-tanks";
-    }
-
-    @PostMapping("/tanks/delete/all")
-    public String deleteAllTanks(@AuthenticationPrincipal UserDetails userDetails) {
-        tankService.deleteAllTUserTanks(userDetails);
-        return "redirect:/tank/add";
-    }
-
     @GetMapping("/user/tank/delete")
     public String getUserTankDelete() {
         return "user-role-tank-delete";
