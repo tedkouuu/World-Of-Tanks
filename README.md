@@ -1,4 +1,5 @@
-# World of Tanks 🎮
+# World of Tanks 🎮  
+[![Live Demo](https://img.shields.io/badge/🚀_LIVE_DEMO-WOT-FF6D00?style=for-the-badge)](https://world-of-tanks.net)
 
 ## https://world-of-tanks.net
 
