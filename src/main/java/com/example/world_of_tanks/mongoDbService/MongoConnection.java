@@ -7,7 +7,7 @@ import com.mongodb.client.MongoDatabase;
 public class MongoConnection {
 
     private static final String CONNECTION_STRING =
-            "mongodb://teo:12345678@wot-mongo:27017/?authSource=admin";
+            "mongodb://root:1234@wot-mongo:27017/world-of-tanks?authSource=admin";
 
     private static final String DATABASE_NAME = "world-of-tanks";
 
