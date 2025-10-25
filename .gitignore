@@ -29,5 +29,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# --- Secrets (Git ignore) ---
+/src/main/resources/secrets/
+/src/main/resources/secrets/awsCredentials
+/src/main/resources/secrets/awsCredentials.*
+
 ### VS Code ###
 .vscode/

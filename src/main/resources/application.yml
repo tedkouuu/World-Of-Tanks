@@ -21,11 +21,16 @@ spring:
 
   autoconfigure:
     exclude:
-    - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 
 mail:
   host: localhost
   port: 1025
   username: WorldOfTanks@gmail.com
   password: topsecret
+
+aws:
+  region: eu-north-1
+  s3:
+    bucket: wot-media-teodor
 
