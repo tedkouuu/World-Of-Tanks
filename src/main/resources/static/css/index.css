@@ -5,8 +5,7 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
 
-    /* Фоново изображение за цялата страница */
-    background: url("/images/tank.jpg") center center no-repeat fixed;
+    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
 }
@@ -17,7 +16,6 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* Анимация за плавно появяване */
     animation: fadeIn 1.5s ease-in-out;
 }
 
@@ -63,7 +61,7 @@ html, body {
 }
 
 .btn-primary {
-    background-color: #e63946; /* Ярък акцентен цвят */
+    background-color: #e63946;
     border: none;
     color: #fff;
     padding: 0.75rem 1.5rem;

@@ -13,7 +13,7 @@ body {
 }
 
 body {
-    background-image: url("/images/tank.jpg");
+    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -117,7 +117,6 @@ h1 {
     width: 20px;
 }
 
-/* New Navigation Styles */
 .navbar {
     background: linear-gradient(135deg, #2c3e50, #000000);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);

@@ -1,16 +1,14 @@
-/* Reset и базови настройки за html и body */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
-    background: url("/images/tank.jpg") center center no-repeat fixed;
+    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
 }
 
-/* Секция Masthead */
 .masthead {
     position: relative;
     width: 100%;
@@ -29,7 +27,6 @@ html, body {
     z-index: 1;
 }
 
-/* Основен контейнер за съдържанието */
 .container {
     position: relative;
     z-index: 2;
@@ -38,7 +35,6 @@ html, body {
     color: #fff;
 }
 
-/* Заглавие за търсенето */
 h2#searchH2 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2rem;
@@ -47,7 +43,6 @@ h2#searchH2 {
     margin-bottom: 2rem;
 }
 
-/* Формата за търсене */
 #searchForm {
     display: flex;
     justify-content: center;
@@ -59,7 +54,6 @@ h2#searchH2 {
     margin-bottom: 3rem;
 }
 
-/* Стилове за елементите във формата */
 .form-control {
     background: rgba(255, 255, 255, 0.9);
     border: none;
@@ -76,7 +70,6 @@ h2#searchH2 {
     outline: none;
 }
 
-/* Стилове за основния бутон */
 .btn-primary {
     background: #007bff;
     border: none;
@@ -96,13 +89,11 @@ h2#searchH2 {
     transform: translateY(-2px);
 }
 
-/* Анимация за плавно появяване */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* Адаптивни настройки за устройства с максимална ширина 768px */
 @media (max-width: 768px) {
     #searchForm {
         flex-direction: column;

@@ -1,39 +1,25 @@
-/*
- * Основен стил за тялото (body)
- * - Добавяме паралакс фон
- */
 .body-main {
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #f1f1f1;
-    background-color: #121212; /* Резервен (fallback) цвят,
-                                  ако не се зареди фонът */
+    background-color: #121212;
 }
 
-/*
- * Паралакс фонов слой
- * Използвайте подходящ <div class="parallax-bg"></div>
- * около jumbotron-a в HTML, за да работи ефектът.
- */
 .parallax-bg {
     position: relative;
-    background: url("/images/battle-bg.jpg") no-repeat center center fixed;
+    background: url("/assets/images/battle-bg.jpg") no-repeat center center fixed;
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    min-height: 100vh; /* Може да се настрои според нуждите */
-    z-index: -1;       /* Съдържанието е над този слой */
+    min-height: 100vh;
+    z-index: -1;
 }
 
-/* За по-плавно превъртане на паралакса */
 html {
     scroll-behavior: smooth;
 }
 
-/*
- * Контейнер (примерно jumbotron) с полу-прозрачна/стъклена визия (glassmorphism)
- */
 .jumbotron {
     position: relative;
     margin: 0 auto;
@@ -43,12 +29,11 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     border-radius: 16px;
-    max-width: 1200px;       /* Регулирайте според дизайна */
+    max-width: 1200px;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
-/* По-голямо и добре забележимо заглавие */
 #h1home {
     font-size: 3.2rem;
     font-weight: 700;
@@ -57,7 +42,6 @@ html {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
 }
 
-/* Стилизация на картите - добавяме glassmorphism ефект в card */
 .card {
     display: flex;
     flex-direction: row;
@@ -70,13 +54,11 @@ html {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Леко издигане и подсилена сянка при hover */
 .card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
 }
 
-/* Анимираме изображението леко да се уголеми при hover */
 .card:hover img.card-img-right {
     transform: scale(1.05);
     transition: transform 0.3s ease;
@@ -101,11 +83,6 @@ html {
     color: #fff;
 }
 
-/*
- * Изображението на картата
- * - фиксираме размер и активираме transition,
- *   за да се прилага ефект при hover
- */
 .card-img-right {
     width: 240px;
     height: 260px;
@@ -113,9 +90,6 @@ html {
     transition: transform 0.3s ease;
 }
 
-/*
- * Стилизация на select полето
- */
 .form-select {
     width: 100%;
     padding: 0.8rem;
@@ -139,17 +113,11 @@ html {
     box-shadow: 0 0 6px rgba(255, 224, 130, 0.6);
 }
 
-/*
- * Стил за опциите в select
- */
 .form-select option {
     background: #1c1c1c;
     color: #f1f1f1;
 }
 
-/*
- * Бутонът Attack!
- */
 .customSpan button {
     width: 100%;
     padding: 1rem;
@@ -165,18 +133,12 @@ html {
     text-transform: uppercase;
 }
 
-/*
- * Анимиран "пулсиращ" ефект при hover
- */
 .customSpan button:hover {
     background: linear-gradient(135deg, #b71c1c, #ef5350);
     transform: scale(1.03);
     box-shadow: 0 10px 20px rgba(239, 83, 80, 0.5);
 }
 
-/*
- * Responsive настройки
- */
 @media (max-width: 768px) {
     .jumbotron {
         padding: 3rem 1rem;

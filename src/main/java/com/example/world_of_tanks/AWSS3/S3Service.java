@@ -1,4 +1,5 @@
 package com.example.world_of_tanks.AWSS3;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -13,24 +14,33 @@ import java.time.Duration;
 
 @Service
 public class S3Service {
+
     private final String bucket;
     private final S3Client s3;
     private final S3Presigner presigner;
 
-    public S3Service(@Value("${aws.s3.bucket}") String bucket,
-                     @Value("${aws.region}") String region) {
+    public S3Service(
+            @Value("${aws.s3.bucket}") String bucket,
+            @Value("${aws.region}") String region
+    ) {
         this.bucket = bucket;
         var creds = DefaultCredentialsProvider.create();
-        var r = Region.of(region);
-        this.s3 = S3Client.builder().region(r).credentialsProvider(creds).build();
-        this.presigner = S3Presigner.builder().region(r).credentialsProvider(creds).build();
+        var reg = Region.of(region);
+        this.s3 = S3Client.builder().region(reg).credentialsProvider(creds).build();
+        this.presigner = S3Presigner.builder().region(reg).credentialsProvider(creds).build();
     }
 
-    public URL presign(String key, int minutes) {
-        var get = GetObjectRequest.builder().bucket(bucket).key(key).build();
+    public URL presignGet(String key, int minutes) {
+        var get = GetObjectRequest.builder()
+                .bucket(bucket)
+                .key(key)
+                .build();
+
         var req = GetObjectPresignRequest.builder()
+                .getObjectRequest(get)
                 .signatureDuration(Duration.ofMinutes(minutes))
-                .getObjectRequest(get).build();
+                .build();
+
         return presigner.presignGetObject(req).url();
     }
 }
