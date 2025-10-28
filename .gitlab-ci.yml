@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+
+variables:
+  PROJECT_NAME: WoT
+
+# Build stage
+build-job:
+  stage: build
+  # Create a container from that image and run it on GitLab
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  script:
+    - echo "Building the project..."
+    - mvn install
+
+# Test stage
+test-job:
+  stage: test
+  # Create a container from that image and run it on GitLab
+  image: maven:3.9.9-eclipse-temurin-17
+  only:
+    - main
+  script:
+    - echo "Running unit test in the project..."
+    - mvn test
+    - mvn checkstyle:checkstyle
