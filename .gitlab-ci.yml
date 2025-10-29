@@ -1,3 +1,9 @@
+stages:
+  - build
+  - test
+  - security
+  - notify
+
 # Rules for starting the pipeline
 workflow:
   rules:
@@ -19,10 +25,6 @@ workflow:
 
     - when: never
 
-stages:
-  - build
-  - test
-
 variables:
   PROJECT_NAME: WoT
 
@@ -36,15 +38,43 @@ build-job:
   script:
     - echo "Building the project..."
     - mvn install
+  after_script:
+    - ls -la
+  artifacts:
+    paths:
+      - target/world-of-tanks.war
+    when: always
 
 # Test stage
 test-job:
   stage: test
   # Create a container from that image and run it on GitLab
   image: maven:3.9.9-eclipse-temurin-17
+  needs: [ build-job ]
   only:
     - main
   script:
     - echo "Running unit test in the project..."
     - mvn test
     - mvn checkstyle:checkstyle
+
+security-scan:
+  stage: security
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [ "" ]
+  needs: [ build-job ]
+  script:
+    - trivy fs --format json --exit-code 0 --vuln-type os,library --output trivy-results.json
+  after_script:
+    - ls -la
+  artifacts:
+    paths:
+      - trivy-results.json
+    when: always
+
+notify-on-failure:
+  stage: notify
+  script:
+    - echo "Build or Test job failed for ${PROJECT_NAME}! Please check logs."
+  when: on_failure
