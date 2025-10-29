@@ -1,0 +1,10 @@
+.git
+.gitlab
+.gitlab-ci.yml
+.mvn
+.m2
+node_modules
+target/*
+!target/world-of-tanks.jar
+README.md
+docs/

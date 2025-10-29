@@ -3,6 +3,7 @@ stages:
   - test
   - security
   - notify
+  - docker
 
 # Rules for starting the pipeline
 workflow:
@@ -42,7 +43,7 @@ build-job:
     - ls -la
   artifacts:
     paths:
-      - target/world-of-tanks.war
+      - target/world-of-tanks.jar
     when: always
 
 # Test stage
@@ -65,13 +66,32 @@ security-scan:
     entrypoint: [ "" ]
   needs: [ build-job ]
   script:
-    - trivy fs --format json --exit-code 0 --vuln-type os,library --output trivy-results.json
+    - trivy fs --format json --exit-code 1 --severity HIGH,CRITICAL --vuln-type os,library --output trivy-results.json
   after_script:
     - ls -la
   artifacts:
     paths:
       - trivy-results.json
     when: always
+
+docker-build-publish:
+  stage: docker
+  image: docker:latest
+  services:
+    - docker:dind
+  needs:
+    - job: build-job
+      artifacts: true
+    - job: security-scan
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+    IMAGE_TAG: $CI_COMMIT_SHA
+  script:
+    - echo "Logging in to GitLab Container Registry..."
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - echo "Building Docker image with custom Dockerfile..."
+    - docker build -f Dockerfile -t $CI_REGISTRY_IMAGE:$IMAGE_TAG .
+    - docker push $CI_REGISTRY_IMAGE:$IMAGE_TAG
 
 notify-on-failure:
   stage: notify
