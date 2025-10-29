@@ -7,9 +7,6 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: always
 
-    - if: '$CI_COMMIT_TAG'
-      when: always
-
     - changes:
         - "src/**"
         - "pom.xml"
