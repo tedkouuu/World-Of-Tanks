@@ -1,0 +1,82 @@
+version: "3.9"
+
+name: wot-stack
+
+networks:
+  app_net:
+
+volumes:
+  mongo_data:
+  mysql_data:
+
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: wot-mongo
+    restart: unless-stopped
+    command: ["--bind_ip_all"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+      MONGO_INITDB_DATABASE: world-of-tanks
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mongo -u root -p 1234 --authenticationDatabase admin --quiet --eval 'db.adminCommand({ping:1}).ok' | grep 1 >/dev/null || exit 1"
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      app_net:
+        aliases:
+          - mongo
+          - wot-mongo
+
+  sql:
+    image: mysql:8.0
+    container_name: wot-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: world_of_tanks
+      MYSQL_ROOT_PASSWORD: 1234
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p1234"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      app_net:
+        aliases:
+          - sql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wot-app
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+      sql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://sql:3306/world_of_tanks?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATA_MONGODB_URI: mongodb://root:1234@mongo:27017/world-of-tanks?authSource=admin
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net

@@ -4,7 +4,9 @@
 .mvn
 .m2
 node_modules
+
 target/*
 !target/*-SNAPSHOT.jar
+
 README.md
 docs/
