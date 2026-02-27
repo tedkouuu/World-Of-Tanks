@@ -3,14 +3,12 @@ logging:
     org: WARN
     blog: WARN
     org.hibernate.SQL: DEBUG
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.2.101:3307/world_of_tanks?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://192.168.2.203:3306/world_of_tanks?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 1234
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,19 +16,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
-
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
-
 mail:
   host: localhost
   port: 1025
   username: WorldOfTanks@gmail.com
   password: topsecret
-
 aws:
   region: eu-north-1
   s3:
     bucket: wot-media-teodor
-
