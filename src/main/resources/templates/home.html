@@ -8,62 +8,82 @@
 <body>
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
-    <div class="jumbotron">
-        <div class="hero-intro text-center">
-            <h1 id="h1home" class="text-center p-3 font-weight-bold">
-                Welcome to the battlefield, choose your tank
+    <div class="battle-arena">
+
+        <div class="hero-intro">
+            <h1 class="battle-title">
+                <span class="title-line">Choose Your</span>
+                <span class="title-highlight">Battlefield</span>
             </h1>
-            <p class="hero-subtitle">Pick your attacker and defender, then launch the battle.</p>
+            <p class="battle-subtitle">Select your tanks and launch the attack</p>
+            <div class="title-divider"></div>
         </div>
+
         <form th:action="@{/tanks/battle}"
               th:method="post"
               th:object="${tankAttackDTO}"
-              class="battle-form row mb-2">
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-primary">Attacking Tank</strong>
-                        <h3 class="mb-0 text-white">
-                            Select the attacker
-                        </h3>
-                        <div class="mb-1 text-white">Select owned tank</div>
-                        <select class="form-select mt-5" aria-label="Default select example"
-                                th:field="*{attackerId}" th:onchange="changeImgOfTank(this)">
-                            <option value="0" selected>My tanks
-                            </option>
-                            <option th:each="tank : ${ownTanks}" th:value="${tank.getId()}"
-                                    th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
+              class="battle-form">
 
-                        </select>
-                    </div>
-                    <img class="card-img-right flex-auto d-none d-md-block"
+            <div class="battle-card attacker-card">
+                <div class="card-glow attacker-glow"></div>
+                <div class="card-badge attacker-badge">ATK</div>
+                <div class="card-image-wrap">
+                    <img class="card-tank-img"
                          th:src="@{/images/tank-attacker.jpg}"
                          alt="Attacker tank">
+                    <div class="img-overlay attacker-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <span class="card-role attacker-role">Attacking Tank</span>
+                    <h3 class="card-heading">Select the attacker</h3>
+                    <p class="card-desc">Choose your strongest tank</p>
+                    <select class="tank-select attacker-select"
+                            th:field="*{attackerId}" th:onchange="changeImgOfTank(this)">
+                        <option value="0" selected>My tanks</option>
+                        <option th:each="tank : ${ownTanks}" th:value="${tank.getId()}"
+                                th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
+                    </select>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <strong class="d-inline-block mb-2 text-danger">Defending Tank</strong>
-                        <h3 class="mb-0 text-white">
-                            Select the defender
-                        </h3>
-                        <div class="mb-1 text-white">Select enemy tank</div>
-                        <select class="form-select mt-5" aria-label="Default select example"
-                                th:field="*{defenderId}" th:onchange="changeImgOfTank(this)">
-                            <option value="0" selected>Enemy tanks</option>
-                            <option th:each="tank : ${enemyTanks}" th:value="${tank.id}"
-                                    th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
-                        </select>
-                    </div>
-                    <img class="card-img-right flex-auto d-none d-md-block"
+
+            <div class="vs-section">
+                <div class="vs-line"></div>
+                <div class="vs-badge">
+                    <span class="vs-text">VS</span>
+                </div>
+                <div class="vs-line"></div>
+            </div>
+
+            <div class="battle-card defender-card">
+                <div class="card-glow defender-glow"></div>
+                <div class="card-badge defender-badge">DEF</div>
+                <div class="card-image-wrap">
+                    <img class="card-tank-img"
                          th:src="@{/images/tank-defender.jpg}"
                          alt="Defender tank">
+                    <div class="img-overlay defender-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <span class="card-role defender-role">Defending Tank</span>
+                    <h3 class="card-heading">Select the defender</h3>
+                    <p class="card-desc">Pick your enemy target</p>
+                    <select class="tank-select defender-select"
+                            th:field="*{defenderId}" th:onchange="changeImgOfTank(this)">
+                        <option value="0" selected>Enemy tanks</option>
+                        <option th:each="tank : ${enemyTanks}" th:value="${tank.id}"
+                                th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
+                    </select>
                 </div>
             </div>
-            <span class="customSpan">
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Attack!</button>
-            </span>
+
+            <div class="attack-section">
+                <button class="attack-btn" type="submit">
+                    <span class="btn-text">Launch Attack</span>
+                    <span class="btn-icon">&#9876;</span>
+                </button>
+                <div class="attack-glow"></div>
+            </div>
+
         </form>
     </div>
 </main>

@@ -7,9 +7,7 @@ html, body {
     overflow: hidden;
 }
 
-body {
-    background: #080c14;
-}
+/* body inherits global background (tank.jpg) from style.css */
 
 .masthead {
     position: relative;

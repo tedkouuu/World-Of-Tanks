@@ -2,16 +2,16 @@
    Tank Edit Page
    ================================================ */
 
-body {
-    background: var(--bg-body, #0b0f19);
-}
+/* body inherits global background (tank.jpg) from style.css */
 
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem;
-    background: var(--bg-card, rgba(20, 27, 45, 0.92));
-    border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+    background: rgba(15, 20, 35, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg, 16px);
     box-shadow: var(--shadow-lg, 0 12px 48px rgba(0, 0, 0, 0.5));
     animation: fadeInUp 0.5s ease-out;

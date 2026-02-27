@@ -5,9 +5,9 @@
 :root {
     --bg-body: #0b0f19;
     --bg-surface: #141b2d;
-    --bg-card: rgba(20, 27, 45, 0.92);
-    --bg-glass: rgba(255, 255, 255, 0.03);
-    --bg-input: rgba(15, 23, 42, 0.5);
+    --bg-card: rgba(15, 20, 35, 0.65);
+    --bg-glass: rgba(255, 255, 255, 0.06);
+    --bg-input: rgba(0, 0, 0, 0.3);
     --border: rgba(255, 255, 255, 0.08);
     --border-hover: rgba(255, 255, 255, 0.18);
     --border-focus: rgba(230, 57, 70, 0.45);
@@ -54,10 +54,7 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background:
-        linear-gradient(180deg, rgba(11, 15, 25, 0.7) 0%, rgba(11, 15, 25, 0.85) 100%),
-        radial-gradient(ellipse at 15% 50%, rgba(30, 60, 114, 0.15) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 20%, rgba(230, 57, 70, 0.08) 0%, transparent 55%);
+    background: linear-gradient(180deg, rgba(11, 15, 25, 0.45) 0%, rgba(11, 15, 25, 0.6) 100%);
     pointer-events: none;
     z-index: 0;
 }
@@ -99,10 +96,10 @@ a:hover {
 }
 
 .jumbotron {
-    background: var(--bg-glass);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--border);
+    background: rgba(10, 15, 30, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     max-width: 1200px;

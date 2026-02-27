@@ -2,9 +2,7 @@
    Tank Search Page
    ================================================ */
 
-body {
-    background: var(--bg-body, #0b0f19);
-}
+/* body inherits global background (tank.jpg) from style.css */
 
 .container {
     max-width: 1100px;
@@ -85,7 +83,9 @@ h2#searchH2 {
 }
 
 .offer.card {
-    background: rgba(20, 27, 45, 0.9);
+    background: rgba(15, 20, 35, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-md, 10px) !important;
     overflow: hidden;
