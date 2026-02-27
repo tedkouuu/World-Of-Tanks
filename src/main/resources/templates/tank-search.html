@@ -11,7 +11,7 @@
 <header th:include="~{fragments/navigation}"></header>
 
 <div class="container">
-    <h2 id="searchH2" class="text-center text-white">Search for tanks</h2>
+    <h2 id="searchH2" class="text-center text-white" th:text="#{search_title}">Search for tanks</h2>
 
     <form id="searchForm"
           th:method="GET"
@@ -23,26 +23,26 @@
                 th:field="*{name}"
                 class="form-control mr-sm-2 mb-2"
                 type="search"
-                placeholder="Tank name..."
+                th:placeholder="#{search_name}"
                 aria-label="Search by name"/>
 
         <input
                 th:field="*{health}"
                 class="form-control mr-sm-2 mb-2"
                 type="search"
-                placeholder="Min health..."
+                th:placeholder="#{search_health}"
                 aria-label="Search by health"/>
 
         <input
                 th:field="*{power}"
                 class="form-control mr-sm-2 mb-2"
                 type="search"
-                placeholder="Max power..."
+                th:placeholder="#{search_power}"
                 aria-label="Search by power"/>
 
         <div class="d-flex justify-content-center w-100 mt-3">
             <button class="btn btn-lg btn-primary w-50" type="submit">
-                Search <img id="searchIcon" th:src="@{/images/search-icon.png}" alt="Search icon">
+                <span th:text="#{search_submit}">Search</span> <img id="searchIcon" th:src="@{/images/search-icon.png}" alt="Search icon">
             </button>
         </div>
     </form>
@@ -61,11 +61,11 @@
             </li>
         </ul>
         <div class="card-body text-center">
-            <a id="searchDetails" th:href="@{/tanks/info}" class="btn btn-sm btn-outline-primary">DETAILS</a>
+            <a id="searchDetails" th:href="@{/tanks/info}" class="btn btn-sm btn-outline-primary" th:text="#{search_details}">DETAILS</a>
         </div>
     </div>
 
-    <h3 th:if="${tanks != null and #lists.isEmpty(tanks)}" class="text-info mt-3">
+    <h3 th:if="${tanks != null and #lists.isEmpty(tanks)}" class="text-info mt-3" th:text="#{search_no_results}">
         There are no tanks with this name yet.
     </h3>
 </div>

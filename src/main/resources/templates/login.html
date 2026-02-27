@@ -17,31 +17,31 @@
                      th:src="@{/images/tank-icon.png}"
                      alt=""
                      width="64" height="50">
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 fw-normal" th:text="#{login_title}">Please sign in</h1>
 
                 <div class="form-floating">
                     <input name="username"
                            th:value="${username}"
                            type="text" class="form-control" id="floatingInput" placeholder="username">
-                    <label for="floatingInput">Username</label>
+                    <label for="floatingInput" th:text="#{login_username}">Username</label>
                 </div>
                 <div class="form-floating">
                     <input name="password" type="password" class="form-control" id="floatingPassword"
                            placeholder="password">
-                    <label for="floatingPassword">Password</label>
+                    <label for="floatingPassword" th:text="#{login_password}">Password</label>
                 </div>
 
-                <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                <p th:if="${bad_credentials}" class="errors alert alert-danger" th:text="#{login_error}">
                     Invalid username or password
                 </p>
 
                 <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" value="remember-me">
-                        Remember me
+                        <span th:text="#{login_remember}">Remember me</span>
                     </label>
                 </div>
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit" th:text="#{login_submit}">Sign in</button>
             </form>
         </div>
     </div>

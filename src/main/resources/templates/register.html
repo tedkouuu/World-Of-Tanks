@@ -15,7 +15,7 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card">
                             <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+                                <h2 class="text-uppercase text-center mb-5" th:text="#{register_title}">Create an account</h2>
 
                                 <div class="custom-register-div">
                                     <form th:action="@{/users/register}"
@@ -30,7 +30,7 @@
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
 
-                                            <label class="form-label" for="form3Example1cg">Your Username</label>
+                                            <label class="form-label" for="form3Example1cg" th:text="#{register_username}">Your Username</label>
                                             <small id="usernameHelpInline"
                                                    class="bg-danger text-light rounded invalid-feedback">
                                                 <div
@@ -48,10 +48,10 @@
                                                    th:field="*{fullName}"
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
-                                            <label class="form-label" for="fullName">Your Full Name</label>
+                                            <label class="form-label" for="fullName" th:text="#{register_fullname}">Your Full Name</label>
                                             <small id="fullNameHelpInline"
                                                    class="bg-danger text-light rounded invalid-feedback">
-                                                Full Name must be between 5 and 20 characters!
+                                                <span th:text="#{register_err_fullname}">Full Name must be between 5 and 20 characters!</span>
                                             </small>
                                         </div>
 
@@ -61,7 +61,7 @@
                                                    name="email"
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
-                                            <label class="form-label" for="form3Example3cg">Your Email</label>
+                                            <label class="form-label" for="form3Example3cg" th:text="#{register_email}">Your Email</label>
                                             <small id="emailHelpInline"
                                                    class="bg-danger text-light rounded invalid-feedback">
                                                 <div
@@ -79,10 +79,10 @@
                                                    name="password"
                                                    id="form3Example4cg"
                                                    class="form-control form-control-lg"/>
-                                            <label class="form-label" for="form3Example4cg">Password</label>
+                                            <label class="form-label" for="form3Example4cg" th:text="#{register_password}">Password</label>
                                             <small id="passwordHelpInline"
                                                    class="bg-danger text-light rounded invalid-feedback">
-                                                Password must be at least 3 characters!
+                                                <span th:text="#{register_err_password}">Password must be at least 3 characters!</span>
                                             </small>
                                         </div>
 
@@ -93,16 +93,16 @@
                                                    id="form3Example4cdg"
                                                    name="confirm password"
                                                    class="form-control form-control-lg"/>
-                                            <label class="form-label" for="form3Example4cdg">Repeat your
+                                            <label class="form-label" for="form3Example4cdg" th:text="#{register_confirm_password}">Repeat your
                                                 password</label>
                                             <small id="confirmPasswordHelpInline"
                                                    class="bg-danger text-light rounded invalid-feedback">
-                                                Passwords should match!
+                                                <span th:text="#{register_err_confirm}">Passwords should match!</span>
                                             </small>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="role" class="col-sm-2 col-form-label">User role</label>
+                                            <label for="role" class="col-sm-2 col-form-label" th:text="#{register_role}">User role</label>
                                             <div class="col-sm-10">
                                                 <select id="role"
                                                         name="role"
@@ -110,18 +110,18 @@
                                                         th:errorclass="is-invalid"
                                                         class="custom-select"
                                                         aria-describedby="roleHelpInline">
-                                                    <option value="" selected>Role</option>
-                                                    <option value="ADMIN">ADMIN</option>
-                                                    <option value="USER">USER</option>
+                                                    <option value="" selected th:text="#{register_role_select}">Role</option>
+                                                    <option value="ADMIN" th:text="#{register_role_admin}">ADMIN</option>
+                                                    <option value="USER" th:text="#{register_role_user}">USER</option>
                                                 </select>
                                                 <small id="roleHelpInline"
                                                        class="bg-danger text-light rounded invalid-feedback">
-                                                    Select User Role!
+                                                    <span th:text="#{register_err_role}">Select User Role!</span>
                                                 </small>
                                             </div>
 
                                             <div class="d-flex justify-content-center mt-4">
-                                                <button class="w-100 btn btn-lg btn-primary" type="submit">Register
+                                                <button class="w-100 btn btn-lg btn-primary" type="submit" th:text="#{register_submit}">Register
                                                 </button>
                                             </div>
                                         </div>

@@ -22,22 +22,24 @@ public class TankSpecification implements Specification<Tank> {
 
         Predicate p = cb.conjunction();
 
-        if (searchTankDTO.getName() != null && !searchTankDTO.getName().isEmpty()) {
+        String name = searchTankDTO.getName();
+        if (name != null && !name.trim().isEmpty()) {
             p.getExpressions().add(
-                    cb.and(cb.equal(root.get("name"), searchTankDTO.getName()))
+                    cb.like(cb.lower(root.get("name")), "%" + name.trim().toLowerCase() + "%")
             );
         }
 
-        if (searchTankDTO.getHealth() != null) {
+        Integer health = searchTankDTO.getHealthAsInteger();
+        if (health != null) {
             p.getExpressions().add(
-                    cb.and(cb.greaterThanOrEqualTo(root.get("health"), searchTankDTO.getHealth()))
+                    cb.greaterThanOrEqualTo(root.get("health"), (long) health)
             );
         }
 
-
-        if (searchTankDTO.getPower() != null) {
+        Integer power = searchTankDTO.getPowerAsInteger();
+        if (power != null) {
             p.getExpressions().add(
-                    cb.and(cb.lessThanOrEqualTo(root.get("power"), searchTankDTO.getPower()))
+                    cb.lessThanOrEqualTo(root.get("power"), (long) power)
             );
         }
 

@@ -12,10 +12,10 @@
 
         <div class="hero-intro">
             <h1 class="battle-title">
-                <span class="title-line">Choose Your</span>
-                <span class="title-highlight">Battlefield</span>
+                <span class="title-line" th:text="#{battle_title_1}">Choose Your</span>
+                <span class="title-highlight" th:text="#{battle_title_2}">Battlefield</span>
             </h1>
-            <p class="battle-subtitle">Select your tanks and launch the attack</p>
+            <p class="battle-subtitle" th:text="#{battle_subtitle}">Select your tanks and launch the attack</p>
             <div class="title-divider"></div>
         </div>
 
@@ -34,12 +34,12 @@
                     <div class="img-overlay attacker-overlay"></div>
                 </div>
                 <div class="card-content">
-                    <span class="card-role attacker-role">Attacking Tank</span>
-                    <h3 class="card-heading">Select the attacker</h3>
-                    <p class="card-desc">Choose your strongest tank</p>
+                    <span class="card-role attacker-role" th:text="#{battle_attacker}">Attacking Tank</span>
+                    <h3 class="card-heading" th:text="#{battle_select_attacker}">Select the attacker</h3>
+                    <p class="card-desc" th:text="#{battle_attacker_desc}">Choose your strongest tank</p>
                     <select class="tank-select attacker-select"
                             th:field="*{attackerId}" th:onchange="changeImgOfTank(this)">
-                        <option value="0" selected>My tanks</option>
+                        <option value="0" selected th:text="#{battle_my_tanks}">My tanks</option>
                         <option th:each="tank : ${ownTanks}" th:value="${tank.getId()}"
                                 th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
                     </select>
@@ -64,12 +64,12 @@
                     <div class="img-overlay defender-overlay"></div>
                 </div>
                 <div class="card-content">
-                    <span class="card-role defender-role">Defending Tank</span>
-                    <h3 class="card-heading">Select the defender</h3>
-                    <p class="card-desc">Pick your enemy target</p>
+                    <span class="card-role defender-role" th:text="#{battle_defender}">Defending Tank</span>
+                    <h3 class="card-heading" th:text="#{battle_select_defender}">Select the defender</h3>
+                    <p class="card-desc" th:text="#{battle_defender_desc}">Pick your enemy target</p>
                     <select class="tank-select defender-select"
                             th:field="*{defenderId}" th:onchange="changeImgOfTank(this)">
-                        <option value="0" selected>Enemy tanks</option>
+                        <option value="0" selected th:text="#{battle_enemy_tanks}">Enemy tanks</option>
                         <option th:each="tank : ${enemyTanks}" th:value="${tank.id}"
                                 th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
                     </select>
@@ -78,7 +78,7 @@
 
             <div class="attack-section">
                 <button class="attack-btn" type="submit">
-                    <span class="btn-text">Launch Attack</span>
+                    <span class="btn-text" th:text="#{battle_attack}">Launch Attack</span>
                     <span class="btn-icon">&#9876;</span>
                 </button>
                 <div class="attack-glow"></div>

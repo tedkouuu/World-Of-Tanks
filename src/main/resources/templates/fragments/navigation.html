@@ -7,83 +7,104 @@
 <th:block th:fragment="navigation">
     <nav class="navbar navbar-expand-lg navbar-dark">
 
-        <a class="navbar-brand d-flex align-items-center ml-3" th:href="@{/users/home}">
-            <img width="40"
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/users/home}">
+            <img width="36" height="36"
                  th:src="@{/images/tank-icon.png}"
                  alt="Tank icon"
                  class="mr-2">
             <span class="font-weight-bold">World of Tanks</span>
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar-right-mobile d-lg-none d-flex align-items-center">
+            <form class="lang-form-mobile" method="get"
+                  th:action="@{__${#httpServletRequest.requestURI}__}">
+                <select class="lang-select-mobile"
+                        name="lang" onchange="this.form.submit()">
+                    <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">EN</option>
+                    <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">BG</option>
+                </select>
+            </form>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto ml-3">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link" th:href="@{/}" th:text="#{navbar_home}">
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/tanks/info}" th:text="#{navbar_info}">
-                        Info
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/tanks/search}" th:text="#{navbar_search}">
-                        Search
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span th:text="#{navbar_home}">Home</span>
                     </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/users/home}" th:text="#{navbar_home_logged}">
-                        Home
+                    <a class="nav-link" th:href="@{/users/home}">
+                        <i class="fas fa-crosshairs nav-icon"></i>
+                        <span th:text="#{navbar_home_logged}">Home</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/tanks/info}">
+                        <i class="fas fa-info-circle nav-icon"></i>
+                        <span th:text="#{navbar_info}">Info</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/tanks/search}">
+                        <i class="fas fa-search nav-icon"></i>
+                        <span th:text="#{navbar_search}">Search</span>
                     </a>
                 </li>
 
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/tank/add}" th:text="#{navbar_add_tank}">
-                        Add Tank
+                    <a class="nav-link" th:href="@{/tank/add}">
+                        <i class="fas fa-plus-circle nav-icon"></i>
+                        <span th:text="#{navbar_add_tank}">Add Tank</span>
                     </a>
                 </li>
             </ul>
 
-            <ul class="navbar-nav ml-auto mr-3">
+            <ul class="navbar-nav ml-auto navbar-right-section">
 
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link btn btn-outline-light mx-2" th:href="@{/users/login}">
+                <li class="nav-item nav-auth-btn" sec:authorize="isAnonymous()">
+                    <a class="nav-link btn btn-outline-light" th:href="@{/users/login}">
                         <i class="fas fa-sign-in-alt mr-1"></i>
                         <span th:text="#{navbar_login}">Login</span>
                     </a>
                 </li>
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link btn btn-primary mx-2" th:href="@{/users/register}">
+                <li class="nav-item nav-auth-btn" sec:authorize="isAnonymous()">
+                    <a class="nav-link btn btn-primary" th:href="@{/users/register}">
                         <i class="fas fa-user-plus mr-1"></i>
                         <span th:text="#{navbar_register}">Register</span>
                     </a>
                 </li>
 
-                <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
-                    <div class="text-white px-3">
-                        <span>Welcome, </span><strong><span sec:authentication="name">user</span></strong>!
+                <li class="nav-item nav-user-section" sec:authorize="isAuthenticated()">
+                    <div class="nav-user-info">
+                        <i class="fas fa-user-circle nav-user-avatar"></i>
+                        <div class="nav-user-text">
+                            <span th:text="#{welcome_user}">Welcome, </span>
+                            <strong><span sec:authentication="name">user</span></strong>
+                        </div>
                     </div>
-                    <form th:action="@{/users/logout}" method="post" class="form-inline my-2 my-lg-0">
+                    <form th:action="@{/users/logout}" method="post" class="nav-logout-form">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <button class="btn btn-link nav-link" type="submit"
-                                th:text="#{logout}">Logout</button>
+                        <button class="nav-logout-btn" type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span th:text="#{logout}">Logout</span>
+                        </button>
                     </form>
                 </li>
 
-                <li class="nav-item ml-3" id="languageNav">
+                <li class="nav-item d-none d-lg-flex align-items-center" id="languageNav">
                     <form class="form-inline" method="get"
                           th:action="@{__${#httpServletRequest.requestURI}__}">
                         <select class="form-control form-control-sm custom-select"
-                                id="lang" name="lang" onchange="this.form.submit()">
+                                name="lang" onchange="this.form.submit()">
                             <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">EN</option>
                             <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">BG</option>
                         </select>

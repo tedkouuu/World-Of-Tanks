@@ -3,12 +3,32 @@ logging:
     org: WARN
     blog: WARN
     org.hibernate.SQL: DEBUG
+
+server:
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    accept-count: 100
+    connection-timeout: 5000
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,application/javascript,application/json
+    min-response-size: 1024
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql:3306/world_of_tanks?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 1234
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 10000
+      max-lifetime: 1200000
+      pool-name: WoT-HikariPool
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,6 +36,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
+        default_batch_fetch_size: 16
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration

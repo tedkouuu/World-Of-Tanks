@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -122,54 +123,28 @@ public class TankService {
         tankRepository.delete(tank);
     }
 
+    @Transactional(readOnly = true)
     public List<TankDTO> getTanksOwnedBy(String ownerUsername) {
 
-        List<TankDTO> ownedTanks = new ArrayList<>();
-
-        List<Tank> tanks = this.tankRepository.findByUserUsername(ownerUsername);
-
-        for (Tank tank : tanks) {
-
-            TankDTO tankDto = modelMapper.map(tank, TankDTO.class);
-
-            ownedTanks.add(tankDto);
-        }
-
-        return ownedTanks;
-
+        return this.tankRepository.findByUserUsername(ownerUsername).stream()
+                .map(tank -> modelMapper.map(tank, TankDTO.class))
+                .toList();
     }
 
-
+    @Transactional(readOnly = true)
     public List<TankDTO> getTanksOwnedByNot(String noOwnerUsername) {
 
-        List<TankDTO> enemyTanks = new ArrayList<>();
-
-        List<Tank> tanks = this.tankRepository.findByUserUsernameNot(noOwnerUsername);
-
-        for (Tank tank : tanks) {
-
-            TankDTO tankDto = modelMapper.map(tank, TankDTO.class);
-            enemyTanks.add(tankDto);
-        }
-
-        return enemyTanks;
+        return this.tankRepository.findByUserUsernameNot(noOwnerUsername).stream()
+                .map(tank -> modelMapper.map(tank, TankDTO.class))
+                .toList();
     }
 
-
+    @Transactional(readOnly = true)
     public List<TankDTO> getAllSorted() {
 
-        List<TankDTO> sortedTanks = new ArrayList<>();
-
-        List<Tank> tanks = this.tankRepository.findByOrderByHealthDesc();
-
-        for (Tank tank : tanks) {
-
-            TankDTO tankDto = modelMapper.map(tank, TankDTO.class);
-
-            sortedTanks.add(tankDto);
-        }
-
-        return sortedTanks;
+        return this.tankRepository.findByOrderByHealthDesc().stream()
+                .map(tank -> modelMapper.map(tank, TankDTO.class))
+                .toList();
     }
 
     public List<Tank> findAll() {
@@ -217,32 +192,23 @@ public class TankService {
 
     }
 
+    @Transactional(readOnly = true)
     public List<TankInfoDTO> findAllTanks() {
 
-        List<Tank> allTanks = this.tankRepository.findAll();
+        return this.tankRepository.findAll().stream()
+                .map(this::mapToTankInfoDTOFull)
+                .toList();
+    }
 
-        List<TankInfoDTO> tanksToShow = new ArrayList<>();
-
-        for (Tank current : allTanks) {
-
-            Optional<UserEntity> byUsername = userRepository.findByUsername(current.getUser().getUsername());
-
-            UserEntity userEntity = byUsername.get();
-
-            TankInfoDTO tankDTO = new TankInfoDTO()
-                    .setId(current.getId())
-                    .setPower(current.getPower())
-                    .setCreated(current.getCreated())
-                    .setHealth(current.getHealth())
-                    .setName(current.getName())
-                    .setCategoryName(current.getCategory().getName())
-                    .setOwnerUsername(userEntity.getUsername());
-
-            tanksToShow.add(tankDTO);
-
-        }
-
-        return tanksToShow;
+    private TankInfoDTO mapToTankInfoDTOFull(Tank tank) {
+        return new TankInfoDTO()
+                .setId(tank.getId())
+                .setPower(tank.getPower())
+                .setCreated(tank.getCreated())
+                .setHealth(tank.getHealth())
+                .setName(tank.getName())
+                .setCategoryName(tank.getCategory() != null ? tank.getCategory().getName() : null)
+                .setOwnerUsername(tank.getUser() != null ? tank.getUser().getUsername() : null);
     }
 
     public TankDTO getTankById(Long id) {
@@ -260,45 +226,15 @@ public class TankService {
                 .setCategory(realTank.getCategory()).setUser(realTank.getUser());
     }
 
+    @Transactional(readOnly = true)
     public List<TankInfoDTO> searchTanks(SearchTankDTO searchTankDTO) {
-        String name = searchTankDTO.getName();
-        Integer health = searchTankDTO.getHealthAsInteger();
-        Integer power = searchTankDTO.getPowerAsInteger();
+        TankSpecification spec = new TankSpecification(searchTankDTO);
 
-        List<Tank> result = tankRepository.findAll().stream()
-                .filter(tank -> {
-                    boolean matches = true;
-
-                    if (name != null && !name.trim().isEmpty()) {
-                        matches = matches && tank.getName().toLowerCase().contains(name.trim().toLowerCase());
-                    }
-
-                    if (health != null) {
-                        matches = matches && tank.getHealth() >= health;
-                    }
-
-                    if (power != null) {
-                        matches = matches && tank.getPower() <= power;
-                    }
-
-                    return matches;
-                })
+        return tankRepository.findAll(spec).stream()
+                .map(this::mapToTankInfoDTOFull)
                 .toList();
-
-        return result.stream()
-                .map(this::mapToTankInfoDTO)
-                .toList();
-
-
     }
 
-    private TankInfoDTO mapToTankInfoDTO(Tank tank) {
-        return new TankInfoDTO()
-                .setId(tank.getId())
-                .setName(tank.getName())
-                .setHealth(tank.getHealth())
-                .setPower(tank.getPower());
-    }
 }
 
 

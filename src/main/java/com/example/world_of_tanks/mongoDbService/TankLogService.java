@@ -6,11 +6,16 @@ import com.example.world_of_tanks.models.dto.TankEventLog;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class TankLogService {
 
     private static final MongoEventLogger logger = new MongoEventLogger();
+    private static volatile Executor executor;
+
+    public static void setExecutor(Executor exec) {
+        executor = exec;
+    }
 
     public static void log(String eventType, Tank tank) {
         if (tank == null) return;
@@ -30,11 +35,14 @@ public class TankLogService {
                 payload
         );
 
-        CompletableFuture.runAsync(() -> {
-            try {
-                logger.addEvent(logEntry);
-            } catch (Exception ignored) {
-            }
-        });
+        Executor exec = executor;
+        if (exec != null) {
+            exec.execute(() -> {
+                try {
+                    logger.addEvent(logEntry);
+                } catch (Exception ignored) {
+                }
+            });
+        }
     }
 }

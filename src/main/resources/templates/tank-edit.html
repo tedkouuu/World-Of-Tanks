@@ -11,32 +11,32 @@
 <header th:replace="~{fragments/navigation}"></header>
 
 <div class="container">
-    <h2 class="text-center text-white">Edit Tank</h2>
+    <h2 class="text-center text-white" th:text="#{tank_edit_title}">Edit Tank</h2>
 
     <form th:action="@{'/tanks/edit/' + ${editTankDTO.id}}" th:object="${editTankDTO}" method="post">
 
             <input type="hidden" th:field="*{id}" />
 
         <div>
-            <label>Name:</label>
+            <label th:text="#{tank_edit_name}">Name:</label>
             <input type="text" th:field="*{name}"/>
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
         </div>
 
         <div>
-            <label>Power:</label>
+            <label th:text="#{tank_edit_power}">Power:</label>
             <input type="number" th:field="*{power}"/>
             <span th:if="${#fields.hasErrors('power')}" th:errors="*{power}" class="error"></span>
         </div>
 
         <div>
-            <label>Health:</label>
+            <label th:text="#{tank_edit_health}">Health:</label>
             <input type="number" th:field="*{health}"/>
             <span th:if="${#fields.hasErrors('health')}" th:errors="*{health}" class="error"></span>
         </div>
 
         <div>
-            <button type="submit">Update</button>
+            <button type="submit" th:text="#{tank_edit_submit}">Update</button>
         </div>
     </form>
 </div>
