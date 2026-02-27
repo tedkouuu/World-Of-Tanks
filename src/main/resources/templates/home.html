@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>World Of Tanks Application</title>
+    <title>Battle — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
-<body class="body-main">
+<body>
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
     <div class="jumbotron">
         <div class="hero-intro text-center">
-            <h1 id="h1home" class="text-center p-3 text-blue font-weight-bold">
+            <h1 id="h1home" class="text-center p-3 font-weight-bold">
                 Welcome to the battlefield, choose your tank
             </h1>
             <p class="hero-subtitle">Pick your attacker and defender, then launch the battle.</p>
@@ -20,7 +20,7 @@
               th:object="${tankAttackDTO}"
               class="battle-form row mb-2">
             <div class="col-md-6">
-                <div class="card flex-md-row bg-blur mb-4 box-shadow h-md-250">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
                         <strong class="d-inline-block mb-2 text-primary">Attacking Tank</strong>
                         <h3 class="mb-0 text-white">
@@ -36,14 +36,13 @@
 
                         </select>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                         style="width: 200px; height: 250px;"
+                    <img class="card-img-right flex-auto d-none d-md-block"
                          th:src="@{/assets/images/tank-attacker.svg}"
-                         data-holder-rendered="true">
+                         alt="Attacker tank">
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="bg-blur card flex-md-row mb-4 box-shadow h-md-250">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
                         <strong class="d-inline-block mb-2 text-danger">Defending Tank</strong>
                         <h3 class="mb-0 text-white">
@@ -57,9 +56,9 @@
                                     th:text="${tank.user.getFullName()} + ' - ' + ${tank.getName()}"></option>
                         </select>
                     </div>
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
+                    <img class="card-img-right flex-auto d-none d-md-block"
                          th:src="@{/assets/images/tank-defender.svg}"
-                         data-holder-rendered="true" style="width: 200px; height: 250px;">
+                         alt="Defender tank">
                 </div>
             </div>
             <span class="customSpan">

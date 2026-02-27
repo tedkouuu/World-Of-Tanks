@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>World_Of_Tanks Application</title>
+    <title>Tanks Info — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/tanks-info.css}">
 </head>
@@ -13,13 +14,12 @@
     <h2 class="text-center text-white">Tanks info</h2>
 
     <div id="tanksContainer"
-         class="offers row mx-auto d-flex flex-row justify-content-center"
-         style="margin-top: 40px;">
+         class="offers row mx-auto d-flex flex-row justify-content-center">
 
         <th:block th:each="tank : ${allTanks}">
             <div class="offer card col-sm-6 col-md-3 col-lg-2 m-1 p-0">
                 <div class="card-img-top-wrapper">
-                    <img class="card-img-top" src="/assets/images/tank-defender.svg" alt="Tank image">
+                    <img class="card-img-top" th:src="@{/assets/images/tank-defender.svg}" alt="Tank image">
                 </div>
                 <ul class="tank-details list-group list-group-flush">
                     <li class="list-group-item">
@@ -52,5 +52,6 @@
 </div>
 
 <script th:src="@{/js/pagination.js}"></script>
+<th:block th:include="~{fragments/footer}"/>
 </body>
 </html>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>World_Of_Tanks Application</title>
+    <title>Search — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/search.css}">
 </head>
 
@@ -18,12 +17,11 @@
           th:method="GET"
           th:action="@{/tanks/search}"
           th:object="${searchTankDTO}"
-          class="form-inline justify-content-center mt-5">
+          class="form-inline justify-content-center">
 
         <input
                 th:field="*{name}"
                 class="form-control mr-sm-2 mb-2"
-                style="width: 280px;"
                 type="search"
                 placeholder="Tank name..."
                 aria-label="Search by name"/>
@@ -31,7 +29,6 @@
         <input
                 th:field="*{health}"
                 class="form-control mr-sm-2 mb-2"
-                style="width: 280px;"
                 type="search"
                 placeholder="Min health..."
                 aria-label="Search by health"/>
@@ -39,14 +36,13 @@
         <input
                 th:field="*{power}"
                 class="form-control mr-sm-2 mb-2"
-                style="width: 280px;"
                 type="search"
                 placeholder="Max power..."
                 aria-label="Search by power"/>
 
         <div class="d-flex justify-content-center w-100 mt-3">
             <button class="btn btn-lg btn-primary w-50" type="submit">
-                Search <img id="searchIcon" src="/assets/images/search-icon.svg" alt="Search icon">
+                Search <img id="searchIcon" th:src="@{/assets/images/search-icon.svg}" alt="Search icon">
             </button>
         </div>
     </form>
@@ -55,7 +51,7 @@
 <div class="offers row mx-auto d-flex flex-row justify-content-center mt-5">
     <div th:each="tank : ${tanks}" class="offer card col-sm-6 col-md-3 col-lg-2 m-1 p-0">
         <div class="card-img-top-wrapper">
-            <img class="card-img-top" src="/assets/images/tank-defender.svg" alt="Tank image">
+            <img class="card-img-top" th:src="@{/assets/images/tank-defender.svg}" alt="Tank image">
         </div>
         <ul class="tank-details list-group list-group-flush">
             <li class="list-group-item">

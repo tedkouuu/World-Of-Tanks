@@ -2,10 +2,10 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>World_Of_Tanks Application</title>
+    <title>Edit User — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
-<body class="body-main">
+<body>
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
     <div class="jumbotron">
@@ -13,7 +13,7 @@
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                        <div class="card" style="border-radius: 15px;">
+                        <div class="card">
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Edit User</h2>
 
@@ -29,9 +29,8 @@
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
 
-                                            <label class="form-label" for="form3Example1cg">Old Username</label>
-                                            <small id="oldUsernameHelpInline"
-                                                   class="bg-danger text-light rounded invalid-feedback">
+                                            <label class="form-label">Old Username</label>
+                                            <small class="bg-danger text-light rounded invalid-feedback">
                                                 <div
                                                         th:each="err : ${#fields.errors('oldUsername')}"
                                                         th:text="${err}"
@@ -47,9 +46,8 @@
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
 
-                                            <label class="form-label" for="form3Example1cg">New Username</label>
-                                            <small id="newUsernameHelpInline"
-                                                   class="bg-danger text-light rounded invalid-feedback">
+                                            <label class="form-label">New Username</label>
+                                            <small class="bg-danger text-light rounded invalid-feedback">
                                                 <div
                                                         th:each="err : ${#fields.errors('newUsername')}"
                                                         th:text="${err}"
@@ -65,9 +63,8 @@
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
 
-                                            <label class="form-label" for="form3Example1cg">New Full Name</label>
-                                            <small id="fullNameHelpInline"
-                                                   class="bg-danger text-light rounded invalid-feedback">
+                                            <label class="form-label">New Full Name</label>
+                                            <small class="bg-danger text-light rounded invalid-feedback">
                                                 User Full Name must be between 5 and 20 characters!
                                             </small>
                                         </div>
@@ -75,14 +72,12 @@
                                         <div class="form-outline mb-4">
                                             <input type="password"
                                                    name="password"
-                                                   id="form3Example1cg"
                                                    th:field="*{password}"
                                                    th:errorclass="is-invalid"
                                                    class="form-control form-control-lg"/>
 
-                                            <label class="form-label" for="form3Example1cg">New Password</label>
-                                            <small id="nameHelpInline"
-                                                   class="bg-danger text-light rounded invalid-feedback">
+                                            <label class="form-label">New Password</label>
+                                            <small class="bg-danger text-light rounded invalid-feedback">
                                                 New password must be at least 3 characters!
                                             </small>
                                         </div>
