@@ -5,6 +5,6 @@
 .m2
 node_modules
 target/*
-!target/world-of-tanks.jar
+!target/*-SNAPSHOT.jar
 README.md
 docs/
