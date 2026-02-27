@@ -13,15 +13,9 @@ public class ImageRedirectController {
 
     @GetMapping("/{fileName:.+}")
     public String image(@PathVariable String fileName) {
-        var key = "images/" + fileName;
-        if (s3.isEnabled()) {
-            try {
-                if (s3.exists(key)) {
-                    var url = s3.presignGet(key, 720);
-                    return "redirect:" + url.toString();
-                }
-            } catch (Exception ignored) {
-            }
+        var url = s3.getPresignedUrl("images/" + fileName);
+        if (url != null) {
+            return "redirect:" + url;
         }
         return "redirect:/images/" + fileName;
     }

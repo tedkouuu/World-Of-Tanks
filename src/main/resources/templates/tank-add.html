@@ -2,10 +2,10 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>World_Of_Tanks Application</title>
+    <title>Add Tank — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
-<body class="body-main">
+<body>
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
     <div class="jumbotron">
@@ -13,7 +13,7 @@
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-                        <div class="card" style="border-radius: 15px;">
+                        <div class="card">
                             <div class="card-body p-5">
                                 <h2 class="text-uppercase text-center mb-5">Add Tank</h2>
 
@@ -78,7 +78,7 @@
                                                        class="form-control" id="created"
                                                        aria-describedby="createdHelpInline">
                                                 <small id="createdTimeHelpInline"
-                                                       class="bg-danger text-light rounded is-invalid">
+                                                       class="bg-danger text-light rounded invalid-feedback">
                                                     Created date cannot be in the future.
                                                 </small>
                                             </div>
@@ -99,13 +99,13 @@
                                                     <option value="HEAVY_TANK">HEAVY_TANK</option>
                                                 </select>
                                                 <small id="categoryHelpInline"
-                                                       class="bg-danger text-light rounded is-invalid">
+                                                       class="bg-danger text-light rounded invalid-feedback">
                                                     You must select the category.
                                                 </small>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-center">
+                                        <div class="d-flex justify-content-center mt-3">
                                             <button class="w-100 btn btn-lg btn-primary" type="submit">
                                                 Add Tank
                                             </button>

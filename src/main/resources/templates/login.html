@@ -2,18 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>World_Of_Tanks Application</title>
+    <title>Login — World of Tanks</title>
     <th:block th:replace="~{fragments/head}"></th:block>
 </head>
-<body class="body-main">
+<body>
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
     <div class="jumbotron">
-        <div class="container text-light" style="display: none;">
-            <h1 class="display-3">
-                <strong class="pl-3 font-weight-bold">Login</strong></h1>
-        </div>
-
         <div class="custom-login-div">
             <form th:action="@{/users/login}"
                   th:method="post">
@@ -21,19 +16,18 @@
                 <img class="mb-4"
                      th:src="@{/assets/images/login-icon.svg}"
                      alt=""
-                     width="72" height="57">
+                     width="64" height="50">
                 <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
                     <input name="username"
                            th:value="${username}"
-                           type="text" class="form-control" id="floatingInput" placeholder="username"
-                           wtx-context="9E0D6006-D946-49DB-AA0D-8FD9B58D432A">
+                           type="text" class="form-control" id="floatingInput" placeholder="username">
                     <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
                     <input name="password" type="password" class="form-control" id="floatingPassword"
-                           placeholder="password" wtx-context="70B84895-744D-4846-8983-7935F7FF0300">
+                           placeholder="password">
                     <label for="floatingPassword">Password</label>
                 </div>
 
@@ -43,7 +37,7 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me" wtx-context="3D4A104F-B3DC-4228-BB5D-0C8CDE41D561">
+                        <input type="checkbox" value="remember-me">
                         Remember me
                     </label>
                 </div>

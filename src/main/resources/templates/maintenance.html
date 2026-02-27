@@ -1,12 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance — World of Tanks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #eaeaea;
+            text-align: center;
+            padding: 2rem;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(30,60,114,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 20%, rgba(230,57,70,0.06) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .maint-container {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+        }
+        .maint-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+        }
+        .maint-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fca311;
+            margin-bottom: 1rem;
+        }
+        .maint-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .maint-badge {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1.25rem;
+            background: rgba(252,163,17,0.12);
+            border: 1px solid rgba(252,163,17,0.25);
+            border-radius: 6px;
+            color: #fca311;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
 <body>
-
-<h5>
-    We are currently busy doing maintenance!
-    Please come back after midnight!
-</h5>
-
+    <div class="maint-container">
+        <div class="maint-icon">&#9881;</div>
+        <h1 class="maint-title">Under Maintenance</h1>
+        <p class="maint-text">
+            We're currently performing scheduled maintenance to improve your experience.
+            Please come back after midnight.
+        </p>
+        <span class="maint-badge">Expected back soon</span>
+    </div>
 </body>
 </html>
