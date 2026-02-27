@@ -13,7 +13,14 @@ public class ImageRedirectController {
 
     @GetMapping("/{fileName:.+}")
     public String image(@PathVariable String fileName) {
-        var url = s3.presignGet("images/" + fileName, 720);
-        return "redirect:" + url.toString();   // <-- гарантиран 302
+        var key = "images/" + fileName;
+        try {
+            if (s3.exists(key)) {
+                var url = s3.presignGet(key, 720);
+                return "redirect:" + url.toString();
+            }
+        } catch (Exception ignored) {
+        }
+        return "redirect:/images/" + fileName;
     }
 }

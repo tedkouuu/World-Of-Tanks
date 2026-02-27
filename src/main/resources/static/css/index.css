@@ -5,7 +5,7 @@ html, body {
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
 
-    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
+    background: url("/assets/images/tank-hero.svg") no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
 }
@@ -34,6 +34,22 @@ html, body {
     position: relative;
     z-index: 2;
     padding: 0 15px;
+}
+
+.hero-card {
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+}
+
+.cta-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
 }
 
 @keyframes fadeIn {

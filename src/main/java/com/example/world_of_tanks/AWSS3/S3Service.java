@@ -6,6 +6,9 @@ import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
+import software.amazon.awssdk.services.s3.model.NoSuchKeyException;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 
@@ -42,5 +45,20 @@ public class S3Service {
                 .build();
 
         return presigner.presignGetObject(req).url();
+    }
+
+    public boolean exists(String key) {
+        try {
+            var head = HeadObjectRequest.builder()
+                    .bucket(bucket)
+                    .key(key)
+                    .build();
+            s3.headObject(head);
+            return true;
+        } catch (NoSuchKeyException ex) {
+            return false;
+        } catch (S3Exception ex) {
+            return false;
+        }
     }
 }

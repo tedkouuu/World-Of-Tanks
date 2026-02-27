@@ -13,7 +13,7 @@ body {
 }
 
 body {
-    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
+    background: url("/assets/images/tank-hero.svg") no-repeat center center fixed;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;

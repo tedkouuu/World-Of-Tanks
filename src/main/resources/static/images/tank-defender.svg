@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800" role="img" aria-label="Defender tank">
+  <defs>
+    <linearGradient id="defender-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b2026"/>
+      <stop offset="100%" stop-color="#0f1216"/>
+    </linearGradient>
+    <linearGradient id="defender-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4dabf7"/>
+      <stop offset="100%" stop-color="#1565c0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" rx="24" fill="url(#defender-bg)"/>
+  <circle cx="450" cy="140" r="120" fill="url(#defender-accent)" opacity="0.2"/>
+  <g transform="translate(80,330)">
+    <rect x="0" y="90" width="440" height="140" rx="24" fill="#2d3b40"/>
+    <rect x="80" y="30" width="260" height="90" rx="18" fill="#3a4a50"/>
+    <rect x="260" y="55" width="180" height="22" rx="11" fill="url(#defender-accent)"/>
+    <rect x="150" y="0" width="90" height="36" rx="10" fill="#2a353a"/>
+    <circle cx="90" cy="240" r="26" fill="#171c1f"/>
+    <circle cx="190" cy="240" r="26" fill="#171c1f"/>
+    <circle cx="290" cy="240" r="26" fill="#171c1f"/>
+    <circle cx="390" cy="240" r="26" fill="#171c1f"/>
+    <rect x="40" y="228" width="380" height="20" rx="10" fill="#0f1316"/>
+  </g>
+  <text x="50%" y="120" text-anchor="middle" fill="#c7dcf5" font-family="Arial, sans-serif" font-size="22" letter-spacing="2">DEFENDER</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Battlefield background">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1219"/>
+      <stop offset="50%" stop-color="#1b2836"/>
+      <stop offset="100%" stop-color="#2a1f20"/>
+    </linearGradient>
+    <linearGradient id="ridge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#20252a"/>
+      <stop offset="100%" stop-color="#15191d"/>
+    </linearGradient>
+    <radialGradient id="flare" cx="80%" cy="20%" r="35%">
+      <stop offset="0%" stop-color="#ffb347" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect y="620" width="1600" height="280" fill="#15181c"/>
+  <path d="M0 640 L260 600 L520 640 L860 590 L1180 640 L1600 610 L1600 900 L0 900 Z" fill="url(#ridge)"/>
+  <path d="M0 700 L220 670 L480 700 L760 660 L1020 700 L1360 680 L1600 700 L1600 900 L0 900 Z" fill="#111417"/>
+  <circle cx="1260" cy="180" r="180" fill="url(#flare)"/>
+  <g transform="translate(860,460)">
+    <rect x="0" y="80" width="520" height="120" rx="22" fill="#2c3a40"/>
+    <rect x="80" y="30" width="280" height="80" rx="18" fill="#354449"/>
+    <rect x="300" y="50" width="210" height="22" rx="11" fill="#b3762f"/>
+    <rect x="170" y="0" width="90" height="36" rx="10" fill="#263036"/>
+    <circle cx="120" cy="200" r="28" fill="#161b1e"/>
+    <circle cx="240" cy="200" r="28" fill="#161b1e"/>
+    <circle cx="360" cy="200" r="28" fill="#161b1e"/>
+    <circle cx="480" cy="200" r="28" fill="#161b1e"/>
+    <rect x="40" y="188" width="460" height="20" rx="10" fill="#0f1316"/>
+  </g>
+</svg>

@@ -4,7 +4,7 @@ html, body {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
-    background: url("/assets/images/tank.jpg") no-repeat center center fixed;
+    background: url("/assets/images/tank-hero.svg") no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
 }

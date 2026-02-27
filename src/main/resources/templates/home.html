@@ -9,12 +9,16 @@
 <header th:include="~{fragments/navigation}"></header>
 <main role="main">
     <div class="jumbotron">
-        <h1 id="h1home" class="text-center p-5 text-blue font-weight-bold">Welcome to the battlefield, choose your
-            tank</h1>
+        <div class="hero-intro text-center">
+            <h1 id="h1home" class="text-center p-3 text-blue font-weight-bold">
+                Welcome to the battlefield, choose your tank
+            </h1>
+            <p class="hero-subtitle">Pick your attacker and defender, then launch the battle.</p>
+        </div>
         <form th:action="@{/tanks/battle}"
               th:method="post"
               th:object="${tankAttackDTO}"
-              class="row mb-2">
+              class="battle-form row mb-2">
             <div class="col-md-6">
                 <div class="card flex-md-row bg-blur mb-4 box-shadow h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
@@ -34,7 +38,7 @@
                     </div>
                     <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
                          style="width: 200px; height: 250px;"
-                         th:src="@{/assets/images/tank-attacker.jpg}"
+                         th:src="@{/assets/images/tank-attacker.svg}"
                          data-holder-rendered="true">
                 </div>
             </div>
@@ -54,7 +58,7 @@
                         </select>
                     </div>
                     <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
-                         th:src="@{/assets/images/tank-defender.jpg}"
+                         th:src="@{/assets/images/tank-defender.svg}"
                          data-holder-rendered="true" style="width: 200px; height: 250px;">
                 </div>
             </div>
