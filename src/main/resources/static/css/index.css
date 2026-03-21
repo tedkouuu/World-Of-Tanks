@@ -2,18 +2,19 @@
 .hero-section {
     position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     overflow: hidden;
+    padding-top: 80px;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(11, 15, 25, 0.7) 60%,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(11, 15, 25, 0.75) 60%,
         rgba(11, 15, 25, 0.95) 100%);
     z-index: 1;
 }
@@ -21,10 +22,12 @@
 .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
+    text-align: center !important;
     max-width: 760px;
+    margin: 0 auto;
     padding: 0 2rem;
     animation: fadeInUp 1s ease-out;
+    width: 100%;
 }
 
 .hero-badge {
@@ -45,6 +48,7 @@
 .hero-title {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.25rem;
     margin-bottom: 1.25rem;
 }
@@ -55,11 +59,11 @@
     font-weight: 900;
     letter-spacing: 3px;
     text-transform: uppercase;
+    color: #fff;
     background: linear-gradient(135deg, #fff 0%, #e0e0e0 50%, var(--accent-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
     animation: fadeInUp 1s ease-out 0.2s both;
 }
 
@@ -143,6 +147,12 @@
     width: 1px;
     height: 36px;
     background: rgba(255, 255, 255, 0.12);
+}
+
+/* Reset container padding for landing page */
+.hero-section + .featured-section,
+.featured-section + .categories-section {
+    padding-top: 0;
 }
 
 /* Featured Section */
