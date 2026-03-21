@@ -5,6 +5,7 @@ logging:
     org.hibernate.SQL: DEBUG
 
 server:
+  forward-headers-strategy: native
   tomcat:
     threads:
       max: 200

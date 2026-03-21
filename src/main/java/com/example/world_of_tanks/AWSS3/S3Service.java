@@ -153,7 +153,7 @@ public class S3Service {
                     .build();
             s3.headObject(head);
             return true;
-        } catch (SdkClientException | S3Exception ex) {
+        } catch (NoSuchKeyException | SdkClientException | S3Exception ex) {
             return false;
         }
     }
