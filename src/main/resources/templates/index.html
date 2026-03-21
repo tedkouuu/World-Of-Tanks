@@ -7,8 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
-<header th:include="~{fragments/navigation}"></header>
+<header th:include="~{fragments/navigation :: navigation}"></header>
 
+<main>
 <section class="hero-section">
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -90,6 +91,7 @@
         </div>
     </div>
 </section>
+</main>
 
 <th:block th:replace="~{fragments/footer}"/>
 </body>

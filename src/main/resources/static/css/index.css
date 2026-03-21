@@ -5,6 +5,7 @@
 /* Hero Section */
 .hero-section {
     position: relative;
+    width: 100%;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -158,6 +159,7 @@
 
 /* Featured Section */
 .featured-section {
+    width: 100%;
     padding: 5rem 2rem;
     position: relative;
     z-index: 1;
@@ -270,6 +272,7 @@
 
 /* Categories Section */
 .categories-section {
+    width: 100%;
     padding: 0 2rem 5rem;
     position: relative;
     z-index: 1;
