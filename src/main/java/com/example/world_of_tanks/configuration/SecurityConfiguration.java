@@ -32,7 +32,7 @@ public class SecurityConfiguration {
 
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
 
-                .antMatchers("/assets/**", "/images/**").permitAll()
+                .antMatchers("/favicon.ico", "/assets/**", "/images/**", "/css/**", "/js/**").permitAll()
 
                 .antMatchers("/tanks/info", "/tanks", "/tanks/search", "/tanks/details/**", "/maintenance", "/about").permitAll()
 
