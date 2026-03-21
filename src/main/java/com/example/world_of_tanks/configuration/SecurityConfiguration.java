@@ -32,17 +32,18 @@ public class SecurityConfiguration {
 
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
 
-                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/assets/**", "/images/**").permitAll()
 
-                .antMatchers("/tanks/info", "/tanks/search", "/maintenance").permitAll()
+                .antMatchers("/tanks/info", "/tanks", "/tanks/search", "/tanks/details/**", "/maintenance", "/about").permitAll()
 
                 .antMatchers("/api/**").permitAll()
 
-                .antMatchers("/pages/admins", "/tanks/add", "/tank/edit", "/tank/delete",
-                        "/users/edit", "/users/delete").hasRole("ADMIN")
+                .antMatchers("/admin/**", "/users/edit", "/users/delete").hasRole("ADMIN")
+                .antMatchers("/tank/add", "/tank/edit", "/tank/delete").hasRole("ADMIN")
 
                 .antMatchers("/tanks/battle", "/tanks/delete/all",
                         "/users/tank/edit", "/user/role/tank/edit", "/user/tank/delete").authenticated()
+                .antMatchers("/tanks/add", "/tanks/edit/**", "/tanks/delete/**", "/my-tanks").authenticated()
 
                 .anyRequest().authenticated()
                 .and()

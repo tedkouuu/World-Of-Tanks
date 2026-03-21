@@ -10,7 +10,7 @@ public class EditTankDTO {
     private long id;
 
     @NotBlank(message = "Tank name is required!")
-    @Size(min = 2, max = 10, message = "Tank name must be between 2 and 10 characters")
+    @Size(min = 2, max = 50, message = "Tank name must be between 2 and 50 characters")
     private String name;
 
     @Positive

@@ -1,6 +1,14 @@
-<footer class="site-footer">
+<footer class="site-footer" xmlns:th="http://www.thymeleaf.org">
     <div class="footer-inner">
-        <span class="footer-brand">World of Tanks</span>
-        <span class="footer-copy">&copy; 2022 SoftUni Spring Course</span>
+        <div class="footer-left">
+            <span class="footer-brand">World of Tanks</span>
+            <span class="footer-tagline">Armored Vehicle Archive</span>
+        </div>
+        <div class="footer-links">
+            <a th:href="@{/tanks/info}" th:text="#{navbar_info}">Tanks</a>
+            <a th:href="@{/tanks/search}" th:text="#{navbar_search}">Search</a>
+            <a th:href="@{/about}" th:text="#{footer_about}">About</a>
+        </div>
+        <span class="footer-copy">&copy; 2026 World of Tanks Archive</span>
     </div>
 </footer>

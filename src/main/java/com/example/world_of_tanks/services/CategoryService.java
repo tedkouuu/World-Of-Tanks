@@ -16,20 +16,19 @@ public class CategoryService {
 
     public void seedCategories() {
 
-
         if (categoryRepository.count() != 0) {
             return;
         }
 
-        CategoryEnum[] allCategories = CategoryEnum.values();
+        for (CategoryEnum categoryName : CategoryEnum.values()) {
 
-        int counter = 1;
+            String description = switch (categoryName) {
+                case LIGHT_TANK -> "Fast and agile scout vehicles with low armor but high mobility. Ideal for reconnaissance and flanking maneuvers.";
+                case MEDIUM_TANK -> "Versatile all-rounders balancing firepower, armor, and speed. The backbone of any armored division.";
+                case HEAVY_TANK -> "Heavily armored frontline fighters with devastating firepower. Built to break through enemy defenses.";
+            };
 
-        for (CategoryEnum categoryName : allCategories) {
-
-            Category category = new Category().setName(categoryName).setDescription("I am category number:" + counter);
-
-            counter++;
+            Category category = new Category().setName(categoryName).setDescription(description);
 
             this.categoryRepository.save(category);
         }

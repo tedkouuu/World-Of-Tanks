@@ -26,12 +26,7 @@ public class BattleController {
         if (bindingResult.hasErrors() || !this.battleService.attack(tankAttackDTO)) {
             redirectAttributes.addFlashAttribute("tankAttackDTO", tankAttackDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.tankAttackDTO", bindingResult);
-
-            return "redirect:/users/home";
         }
-
-        this.battleService.attack(tankAttackDTO);
-
 
         return "redirect:/users/home";
     }

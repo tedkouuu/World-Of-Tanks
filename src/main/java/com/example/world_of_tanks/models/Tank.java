@@ -11,8 +11,11 @@ public class Tank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     private long health;
 
@@ -45,6 +48,15 @@ public class Tank {
 
     public Tank setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Tank setDescription(String description) {
+        this.description = description;
         return this;
     }
 

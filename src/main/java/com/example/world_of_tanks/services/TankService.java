@@ -235,6 +235,45 @@ public class TankService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public TankDetailDTO findTankDetailById(Long id) {
+        Tank tank = tankRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tank not found with id: " + id));
+
+        return new TankDetailDTO()
+                .setId(tank.getId())
+                .setName(tank.getName())
+                .setDescription(tank.getDescription())
+                .setPower(tank.getPower())
+                .setHealth(tank.getHealth())
+                .setCreated(tank.getCreated())
+                .setCategoryName(tank.getCategory() != null ? tank.getCategory().getName() : null)
+                .setCategoryDescription(tank.getCategory() != null ? tank.getCategory().getDescription() : null)
+                .setOwnerUsername(tank.getUser() != null ? tank.getUser().getUsername() : null);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TankInfoDTO> findRelatedTanks(Long excludeId, CategoryEnum category, int limit) {
+        return tankRepository.findAll().stream()
+                .filter(t -> t.getId() != null && !t.getId().equals(excludeId))
+                .filter(t -> t.getCategory() != null && t.getCategory().getName() == category)
+                .limit(limit)
+                .map(this::mapToTankInfoDTOFull)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public long countTanks() {
+        return tankRepository.count();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TankInfoDTO> findFeaturedTanks(int limit) {
+        return tankRepository.findByOrderByHealthDesc().stream()
+                .limit(limit)
+                .map(this::mapToTankInfoDTOFull)
+                .toList();
+    }
 }
 
 

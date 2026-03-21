@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class AddTankDTO {
 
     @NotBlank(message = "Name is required")
-    @Size(min = 2, max = 10, message = "Name must be between 2 and 10 characters!")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters!")
     @UniqueTankName(message = "Tank with this name already exists!")
     private String name;
 

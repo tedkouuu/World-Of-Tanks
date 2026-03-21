@@ -1,26 +1,96 @@
 <!DOCTYPE html>
-<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>World of Tanks</title>
+    <title>World of Tanks — Tank Archive</title>
     <th:block th:replace="~{fragments/head}"></th:block>
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
 <header th:include="~{fragments/navigation}"></header>
 
-<div class="masthead">
-    <div class="overlay"></div>
-    <div class="container h-100 d-flex align-items-center justify-content-center">
-        <div class="text-center hero-card">
-            <h1 class="text-uppercase text-white font-weight-bold" th:text="#{landing_title}">World of Tanks</h1>
-            <p class="text-faded mt-4" th:text="#{landing_subtitle}">Welcome, please register to start your journey!</p>
-            <div class="cta-group">
-                <a class="btn btn-primary btn-lg mt-3" href="/users/register" role="button" th:text="#{landing_register}">Register</a>
-                <a class="btn btn-outline-light btn-lg mt-3" href="/users/login" role="button" th:text="#{landing_login}">Login</a>
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge" th:text="#{landing_badge}">ARMORED VEHICLE DATABASE</div>
+        <h1 class="hero-title">
+            <span class="hero-title-main">World of Tanks</span>
+            <span class="hero-title-sub" th:text="#{landing_tagline}">Explore. Compare. Dominate.</span>
+        </h1>
+        <p class="hero-description" th:text="#{landing_subtitle}">
+            Browse our complete archive of legendary armored vehicles from every era.
+        </p>
+        <div class="hero-cta">
+            <a class="btn btn-primary btn-lg hero-btn-primary" href="/users/register" th:text="#{landing_register}">Register</a>
+            <a class="btn btn-outline-light btn-lg hero-btn-secondary" href="/tanks/info" th:text="#{landing_browse}">Browse Tanks</a>
+        </div>
+
+        <div class="hero-stats" th:if="${tankCount > 0}">
+            <div class="hero-stat">
+                <span class="hero-stat-value" th:text="${tankCount}">12</span>
+                <span class="hero-stat-label" th:text="#{landing_stat_tanks}">Tanks</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">3</span>
+                <span class="hero-stat-label" th:text="#{landing_stat_categories}">Categories</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat">
+                <span class="hero-stat-value">WWII</span>
+                <span class="hero-stat-label" th:text="#{landing_stat_era}">Era</span>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="featured-section" th:if="${featuredTanks != null && !featuredTanks.isEmpty()}">
+    <div class="featured-container">
+        <h2 class="section-title" th:text="#{landing_featured_title}">Featured Tanks</h2>
+        <p class="section-subtitle" th:text="#{landing_featured_subtitle}">The most powerful machines in our archive</p>
+        <div class="featured-grid">
+            <th:block th:each="tank : ${featuredTanks}">
+                <a th:href="@{'/tanks/details/' + ${tank.id}}" class="featured-card">
+                    <div class="featured-card-img">
+                        <img th:src="@{/images/tank-defender.jpg}" alt="Tank">
+                        <div class="featured-card-badge" th:text="${tank.categoryName}">HEAVY_TANK</div>
+                    </div>
+                    <div class="featured-card-body">
+                        <h3 th:text="${tank.name}">Tiger I</h3>
+                        <div class="featured-card-stats">
+                            <span class="fc-stat"><i class="fas fa-heart"></i> <span th:text="${tank.health}">1200</span></span>
+                            <span class="fc-stat"><i class="fas fa-bolt"></i> <span th:text="${tank.power}">450</span></span>
+                        </div>
+                    </div>
+                </a>
+            </th:block>
+        </div>
+    </div>
+</section>
+
+<section class="categories-section">
+    <div class="categories-container">
+        <h2 class="section-title" th:text="#{landing_categories_title}">Tank Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card category-light">
+                <div class="cat-icon"><i class="fas fa-running"></i></div>
+                <h3 th:text="#{landing_cat_light}">Light Tanks</h3>
+                <p th:text="#{landing_cat_light_desc}">Fast scouts with high mobility</p>
+            </div>
+            <div class="category-card category-medium">
+                <div class="cat-icon"><i class="fas fa-balance-scale"></i></div>
+                <h3 th:text="#{landing_cat_medium}">Medium Tanks</h3>
+                <p th:text="#{landing_cat_medium_desc}">Versatile all-rounders</p>
+            </div>
+            <div class="category-card category-heavy">
+                <div class="cat-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3 th:text="#{landing_cat_heavy}">Heavy Tanks</h3>
+                <p th:text="#{landing_cat_heavy_desc}">Heavily armored frontliners</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<th:block th:replace="~{fragments/footer}"/>
 </body>
 </html>

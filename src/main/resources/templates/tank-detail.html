@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="${tank.name} + ' — World of Tanks'">Tank — World of Tanks</title>
+    <th:block th:replace="~{fragments/head}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/tank-detail.css}">
+</head>
+<body>
+<header th:include="~{fragments/navigation}"></header>
+
+<main role="main">
+    <div class="container tank-detail-container">
+
+        <nav aria-label="breadcrumb" class="detail-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/tanks/info}" th:text="#{tanks_info_title}">Tanks</a></li>
+                <li class="breadcrumb-item active" th:text="${tank.name}">Tank Name</li>
+            </ol>
+        </nav>
+
+        <div class="detail-hero">
+            <div class="detail-hero-image">
+                <img th:src="@{/images/tank-defender.jpg}" alt="Tank image" class="hero-img">
+                <div class="category-badge" th:if="${tank.categoryName}">
+                    <i class="fas fa-shield-alt"></i>
+                    <span th:text="${tank.categoryName}">HEAVY_TANK</span>
+                </div>
+            </div>
+
+            <div class="detail-hero-info">
+                <h1 class="tank-title" th:text="${tank.name}">Tiger I</h1>
+                <p class="tank-description" th:if="${tank.description}" th:text="${tank.description}">
+                    Tank description goes here.
+                </p>
+
+                <div class="tank-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span th:text="#{tank_owner}">Owner:</span>
+                        <strong th:text="${tank.ownerUsername ?: 'Unknown'}">admin</strong>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span th:text="#{tank_created}">Created:</span>
+                        <strong th:text="${tank.created}">2025-01-01</strong>
+                    </div>
+                </div>
+
+                <div class="tank-stats-grid">
+                    <div class="stat-card stat-health">
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label" th:text="#{tank_health}">Health</span>
+                            <span class="stat-value" th:text="${tank.health}">1200</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-power">
+                        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label" th:text="#{tank_power}">Power</span>
+                            <span class="stat-value" th:text="${tank.power}">450</span>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-category">
+                        <div class="stat-icon"><i class="fas fa-tags"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label" th:text="#{tank_category}">Category</span>
+                            <span class="stat-value" th:text="${tank.categoryName}">HEAVY</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-actions" sec:authorize="isAuthenticated()">
+                    <a th:href="@{'/tanks/edit/' + ${tank.id}}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> <span th:text="#{btn_edit}">Edit</span>
+                    </a>
+                    <form th:action="@{'/tanks/delete/' + ${tank.id}}" method="post" style="display:inline;">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit" class="btn btn-danger-outline"
+                                onclick="return confirm('Are you sure?');">
+                            <i class="fas fa-trash-alt"></i> <span th:text="#{btn_delete}">Delete</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-info-section" th:if="${tank.categoryDescription}">
+            <h3 th:text="#{detail_about_category}">About this category</h3>
+            <p th:text="${tank.categoryDescription}">Category description here.</p>
+        </div>
+
+        <div class="related-tanks-section" th:if="${relatedTanks != null && !relatedTanks.isEmpty()}">
+            <h3 th:text="#{detail_related_tanks}">Related Tanks</h3>
+            <div class="related-tanks-grid">
+                <th:block th:each="related : ${relatedTanks}">
+                    <a th:href="@{'/tanks/details/' + ${related.id}}" class="related-tank-card">
+                        <img th:src="@{/images/tank-defender.jpg}" alt="Tank">
+                        <div class="related-tank-info">
+                            <h4 th:text="${related.name}">T-34</h4>
+                            <div class="related-tank-stats">
+                                <span><i class="fas fa-heart"></i> <span th:text="${related.health}">850</span></span>
+                                <span><i class="fas fa-bolt"></i> <span th:text="${related.power}">380</span></span>
+                            </div>
+                        </div>
+                    </a>
+                </th:block>
+            </div>
+        </div>
+
+        <div class="back-link">
+            <a th:href="@{/tanks/info}" class="btn btn-outline-light">
+                <i class="fas fa-arrow-left"></i> <span th:text="#{detail_back_to_list}">Back to all tanks</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="~{fragments/footer}"/>
+</body>
+</html>

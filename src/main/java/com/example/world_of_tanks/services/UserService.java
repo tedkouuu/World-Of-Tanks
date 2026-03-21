@@ -37,9 +37,7 @@ public class UserService {
 
     public void register(RegisterDTO registerDTO, Locale preferredLocale) {
 
-        UserRoleEnum userRoleEnum = registerDTO.getRole();
-
-        UserRoleEntity role = this.userRoleRepository.findByUserRole(userRoleEnum);
+        UserRoleEntity role = this.userRoleRepository.findByUserRole(UserRoleEnum.USER);
 
         UserEntity user = modelMapper.map(registerDTO, UserEntity.class);
 
@@ -48,9 +46,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         this.userRepository.save(user);
-
-//        emailService.sendRegistrationEmail(registerDTO.getEmail(), registerDTO.getFullName(),
-//                preferredLocale);
 
     }
 

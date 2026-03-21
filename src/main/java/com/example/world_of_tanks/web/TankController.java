@@ -178,6 +178,20 @@ public class TankController {
         return "tanks-info";
     }
 
+    @GetMapping("/tanks/details/{id}")
+    public String tankDetails(@PathVariable Long id, Model model) {
+        TankDetailDTO tank = tankService.findTankDetailById(id);
+        if (tank == null) {
+            return "redirect:/tanks/info";
+        }
+        model.addAttribute("tank", tank);
+        if (tank.getCategoryName() != null) {
+            model.addAttribute("relatedTanks",
+                    tankService.findRelatedTanks(id, tank.getCategoryName(), 4));
+        }
+        return "tank-detail";
+    }
+
     @GetMapping("/tanks/search")
     public String searchTankQuery(@ModelAttribute("searchTankDTO") SearchTankDTO searchTankDTO,
                                   BindingResult bindingResult,
